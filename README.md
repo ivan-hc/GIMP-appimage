@@ -8,11 +8,16 @@ This version is only a sample.
 Furter versions can be easily managed by installing [AM Application Manager](https://github.com/ivan-hc/AM-application-manager).
 # How to integrate GIMP AppImage into the system
 ### Installation
-To download and install the standard version:
+To download and install the 64 bit version (x86_64):
 
     wget https://raw.githubusercontent.com/ivan-hc/GIMP-x86_64.AppImage/main/gimp
     chmod a+x ./gimp
     sudo ./gimp
+  To download and install the 32 bit version (i386, i486, i586, i686):
+
+    wget https://raw.githubusercontent.com/ivan-hc/GIMP-x86_64.AppImage/main/gimp32
+    chmod a+x ./gimp32
+    sudo ./gimp32
 ### Update
 
     /opt/gimp/AM-updater
