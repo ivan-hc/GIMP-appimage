@@ -1,7 +1,7 @@
 # GIMP-x86_64.AppImage
-A script to build and install an AppImage for the latest GIMP version from Debian Unstable repository.
+A script to build and install an AppImage for the latest GIMP version for GLIBC 2.27 (tested on Ubuntu 18.04 and Debian Testing/Unstable).
 
-This repository provides the script to create and install the latest version of GIMP (GNU Image Manipulation Program) from Debian Unstable, and an AppImage ready to be used.
+This repository provides the script to create and install the latest version of GIMP from https://launchpad.net/~savoury1, and an AppImage ready to be used.
 
 This version is only a sample.
 
