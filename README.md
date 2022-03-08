@@ -26,7 +26,7 @@ To download and install the 64 bit version (x86_64):
     sudo /opt/gimp/remove
     
 # EXTRA: GIMP Developer Edition AppImage
-A script to build and install an AppImage for GIMP Developer Edition with support for GLIBC 2.30 (built for Ubuntu 20.04 and tested on Debian Testing/Unstable) is also available on this repository that provides the script to create and install the latest version of GIMP Developer Edition from https://launchpad.net/~savoury1, and an AppImage ready to be used (check https://github.com/ivan-hc/GIMP-64bit-and-32bit.AppImage/releases).
+A script to build and install an AppImage for GIMP Developer Edition with support for GLIBC 2.30 (built for Ubuntu 20.04 and tested on Debian Testing/Unstable) is also available on this repository that provides the script to create and install the latest version of GIMP Developer Edition from https://launchpad.net/~mati75, and an AppImage ready to be used (check https://github.com/ivan-hc/GIMP-64bit-and-32bit.AppImage/releases).
 
 This version is only a sample.
 
