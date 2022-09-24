@@ -18,8 +18,7 @@ jobs:
         chmod a+x ./gimp
         sudo ./gimp
         mkdir dist
-        chmod a+x /opt/gimp/gimp
-        VERSION=$(/opt/gimp/gimp --version | grep -Eo "[0-9]+([.][0-9]+)?+[+-]?")
+        VERSION=$(curl -sL https://ppa.launchpadcontent.net/savoury1/gimp/ubuntu/pool/main/g/gimp/ | grep -Po '(?<=href=")[^"]*(?=")' | grep gimp_ | grep 18.04 | head -1 | cut -f1 -d "-" | grep -Eo "[0-9]+([.][0-9]+)?+[+-]?[0-9]?")
         mv /opt/gimp/gimp dist/GNU_Image_Manipulation_Program-$VERSION-x86_64.AppImage
 
     - name: Upload artifact
