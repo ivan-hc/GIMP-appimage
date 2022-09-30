@@ -17,11 +17,15 @@ jobs:
     - name: build
       run: |
         wget https://raw.githubusercontent.com/ivan-hc/GIMP-appimage/main/gimp
-        chmod a+x ./gimp
+        wget https://raw.githubusercontent.com/ivan-hc/GIMP-appimage/main/gimp-dev
+        chmod a+x ./gimp ./gimp-dev
         sudo ./gimp
+        sudo ./gimp-dev
         mkdir dist
         VERSION=$(curl -sL https://ppa.launchpadcontent.net/savoury1/gimp/ubuntu/pool/main/g/gimp/ | grep -Po '(?<=href=")[^"]*(?=")' | grep gimp_ | grep 18.04 | head -1 | cut -f1 -d "-" | grep -Eo "[0-9]+([.][0-9]+)?+[+-]?[0-9]?")
         mv /opt/gimp/gimp dist/GNU_Image_Manipulation_Program-$VERSION-x86_64.AppImage
+        DEVERSION=$(curl -sL https://ppa.launchpadcontent.net/mati75/gimp30/ubuntu/pool/main/g/gimp/ | grep -Po '(?<=href=")[^"]*(?=")' | grep gimp_ | grep 20.04 | head -1 | cut -f1 -d "~" | grep -Eo "[0-9]+([.][0-9]+)?+[+-]?+[0-9]?+[.]?+[0-9]?")
+        mv /opt/gimp-dev/gimp-dev dist/GNU_Image_Manipulation_Program-DEV-$DEVERSION-x86_64.AppImage
 
     - name: Upload artifact
       uses: actions/upload-artifact@v1.0.0
@@ -47,4 +51,5 @@ jobs:
             draft: false
             files: |
               GNU_Image_Manipulation_Program-x86_64.AppImage
+              GNU_Image_Manipulation_Program-DEV-x86_64.AppImage
             repo_token: ${{ secrets.GITHUB_TOKEN }}
