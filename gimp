@@ -57,7 +57,7 @@ for LIBS in ${HERE}/usr/lib/x86_64-linux-gnu/; do
 export LD_PRELOAD=$LIBS
 done
 export PATH=/bin/:/usr/bin/:/usr/local/bin/:/sbin/:"${HERE}"/usr/bin/:"${HERE}"/usr/sbin/:"${HERE}"/usr/games/:"${HERE}"/bin/:"${HERE}"/opt/gimp/:"${HERE}"/sbin/:"${PATH}"
-export LD_LIBRARY_PATH=/usr/lib/:/lib/:/usr/lib/x86_64-linux-gnu/:/lib/x86_64-linux-gnu/"${HERE}"/usr/lib/:"${HERE}"/usr/lib/gimp/:"${HERE}"/usr/lib/i386-linux-gnu/:"${HERE}"/usr/lib/x86_64-linux-gnu/:"${HERE}"/lib/:"${HERE}"/lib/i386-linux-gnu/:"${HERE}"/lib/x86_64-linux-gnu/:"${LD_LIBRARY_PATH}"
+export LD_LIBRARY_PATH=/lib64/:/usr/lib/:/lib/:/usr/lib/x86_64-linux-gnu/:/lib/x86_64-linux-gnu/"${HERE}"/usr/lib/:"${HERE}"/usr/lib/gimp/:"${HERE}"/usr/lib/i386-linux-gnu/:"${HERE}"/usr/lib/x86_64-linux-gnu/:"${HERE}"/lib/:"${HERE}"/lib/i386-linux-gnu/:"${HERE}"/lib/x86_64-linux-gnu/:"${LD_LIBRARY_PATH}"
 export PKG_CONFIG_PATH="${HERE}"/usr/share/pkgconfig/:$PKG_CONFIG_PATH
 export GIMP2_LOCALEDIR="${HERE}/usr/share/locale"
 export GIMP3_LOCALEDIR="${HERE}/usr/share/locale"
