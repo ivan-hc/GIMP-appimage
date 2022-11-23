@@ -15,6 +15,7 @@ jobs:
     - uses: actions/checkout@v3
     - name: build
       run: |
+        sudo apt update && sudo apt install libfuse2
         wget https://raw.githubusercontent.com/ivan-hc/GIMP-appimage/main/gimp
         wget https://raw.githubusercontent.com/ivan-hc/GIMP-appimage/main/gimp-dev
         chmod a+x ./gimp ./gimp-dev
