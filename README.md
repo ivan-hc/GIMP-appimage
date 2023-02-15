@@ -1,23 +1,18 @@
-# GIMP AppImage
-A script to build and install an AppImage for the latest GIMP version for GLIBC 2.27 (tested on Ubuntu 18.04 and Debian Testing/Unstable).
+This repository provides the scripts to create the latest version of GIMP (for Ubuntu 18.04+) from https://launchpad.net/~savoury1 and the latest GIMP Developer Edition (for Ubuntu 20.04+) from https://launchpad.net/~mati75, and AppImage packages ready to be used.
 
-This repository provides the script to create and install the latest version of GIMP from https://launchpad.net/~savoury1, and an AppImage ready to be used.
+Download the latest version from here:
 
-This version is only a sample.
+https://github.com/ivan-hc/GIMP-appimage/releases/tag/continuous
 
-Furter versions can be easily managed by installing [AM Application Manager](https://github.com/ivan-hc/AM-application-manager).
 # How to integrate GIMP AppImage into the system
-### Installation
-To download and install the 64 bit version (x86_64):
+The easier way is to install "AM" on your PC, see [ivan-hc/AM-application-manager](https://github.com/ivan-hc/AM-application-manager) for more.
 
-    wget https://raw.githubusercontent.com/ivan-hc/GIMP-x86_64.AppImage/main/gimp
+Alternatively, you can install it this way:
+
+    wget https://raw.githubusercontent.com/ivan-hc/AM-Application-Manager/main/programs/x86_64/gimp
     chmod a+x ./gimp
     sudo ./gimp
-  To download and install the 32 bit version (i386, i486, i586, i686):
-
-    wget https://raw.githubusercontent.com/ivan-hc/GIMP-x86_64.AppImage/main/gimp32
-    chmod a+x ./gimp32
-    sudo ./gimp32
+The AppImage will be installed in /opt/gimp as `gimp`, near other files.
 ### Update
 
     /opt/gimp/AM-updater
@@ -25,16 +20,10 @@ To download and install the 64 bit version (x86_64):
 
     sudo /opt/gimp/remove
     
-# EXTRA: GIMP Developer Edition AppImage
-A script to build and install an AppImage for GIMP Developer Edition with support for GLIBC 2.30 (built for Ubuntu 20.04 and tested on Debian Testing/Unstable) is also available on this repository that provides the script to create and install the latest version of GIMP Developer Edition from https://launchpad.net/~mati75, and an AppImage ready to be used (check https://github.com/ivan-hc/GIMP-64bit-and-32bit.AppImage/releases).
+## GIMP Developer Edition
+To install the Dev Edition, run:
 
-This version is only a sample.
-
-As already wrote above, furter versions can be easily managed by installing [AM Application Manager](https://github.com/ivan-hc/AM-application-manager).
-# How to integrate GIMP Developer Edition AppImage into the system
-### Installation
-
-    wget https://raw.githubusercontent.com/ivan-hc/GIMP-x86_64.AppImage/main/gimp-dev
+    wget https://raw.githubusercontent.com/ivan-hc/AM-Application-Manager/main/programs/x86_64/gimp-dev
     chmod a+x ./gimp-dev
     sudo ./gimp-dev
 ### Update
@@ -44,8 +33,6 @@ As already wrote above, furter versions can be easily managed by installing [AM 
 
     sudo /opt/gimp-dev/remove
 
-------------------------------------
-***These and more scripts will be available on my new repository, at [ivan-hc/AM-application-manager](https://github.com/ivan-hc/AM-application-manager).***
 ------------------------------------
 # About Rob Savoury's PPA 
 SITE: https://launchpad.net/~savoury1
