@@ -20,15 +20,16 @@ wget https://raw.githubusercontent.com/ivan-hc/AM-application-manager/main/tools
 chmod a+x ./appimagetool ./pkg2appimage
 
 # CREATING THE APPIMAGE
+PREVIOUSLTS=$(wget -q https://releases.ubuntu.com/ -O - | grep class | grep LTS | grep -m2 href | tail -n1 | sed -n 's/.*href="\([^"]*\).*/\1/p' | rev| cut -c 2- | rev)
 echo "app: gimp
 binpatch: true
 
 ingredients:
-  dist: focal
+  dist: $PREVIOUSLTS
   sources:
-    - deb http://archive.ubuntu.com/ubuntu/ focal main universe restricted multiverse
-    - deb http://archive.ubuntu.com/ubuntu focal-security main universe restricted multiverse
-    - deb http://archive.ubuntu.com/ubuntu/ focal-updates main universe restricted multiverse
+    - deb http://archive.ubuntu.com/ubuntu/ $PREVIOUSLTS main universe restricted multiverse
+    - deb http://archive.ubuntu.com/ubuntu $PREVIOUSLTS-security main universe restricted multiverse
+    - deb http://archive.ubuntu.com/ubuntu/ $PREVIOUSLTS-updates main universe restricted multiverse
   ppas:
     - mati75/gimp30
   packages:
