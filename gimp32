@@ -47,33 +47,9 @@ cp /opt/$APP/tmp/recipe.yml /opt/$APP/recipe.yml
 ./pkg2appimage ./recipe.yml;
 
 rm -R -f ./$APP/$APP.AppDir/AppRun
-function1="'^Exec=.*'"
-function2="'s|%.||g'"
-echo '#!/bin/sh
-HERE="$(dirname "$(readlink -f "${0}")")"
-export UNION_PRELOAD="${HERE}"
-LIBS=$($(find . -name "libgimpwidgets*"):$(find . -name "libgimpbase*"):$(find . -name "libgimpcolor*"):$(find . -name "libgimpconfig*"):$(find . -name "libgegl-0*"):$(find . -name "libbabl*"):$(find . -name "libgexiv*"):$(find . -name "libgimpmath*"):$(find . -name "libexiv*"):$(find . -name "libgimpthumb*"):$(find . -name "libgimpmodule*"):$(find . -name "libmypaint*"):$(find . -name "libjson-c*"):$(find . -name "libgimp-2*"):$(find . -name "libgimpui*"))
-for LIBS in ${HERE}/usr/lib/i386-linux-gnu/; do
-export LD_PRELOAD=$LIBS
-done
-export PATH=/bin/:/usr/bin/:/usr/local/bin/:/sbin/:"${HERE}"/usr/bin/:"${HERE}"/usr/sbin/:"${HERE}"/usr/games/:"${HERE}"/bin/:"${HERE}"/opt/gimp/:"${HERE}"/sbin/:"${PATH}"
-export LD_LIBRARY_PATH=/usr/lib/:/lib/:/usr/lib/i386-linux-gnu/:/lib/i386-linux-gnu/"${HERE}"/usr/lib/:"${HERE}"/usr/lib/gimp/:"${HERE}"/usr/lib/i386-linux-gnu/:"${HERE}"/usr/lib/i386-linux-gnu/:"${HERE}"/lib/:"${HERE}"/lib/i386-linux-gnu/:"${HERE}"/lib/i386-linux-gnu/:"${LD_LIBRARY_PATH}"
-export PKG_CONFIG_PATH="${HERE}"/usr/share/pkgconfig/:$PKG_CONFIG_PATH
-export GIMP2_LOCALEDIR="${HERE}/usr/share/locale"
-export GIMP3_LOCALEDIR="${HERE}/usr/share/locale"
-export GIMP2_DATADIR="${HERE}"/usr/share/gimp/2.0/
-export GIMP2_SYSCONFDIR="${HERE}"/etc/gimp/2.0/
-export GIMP2_PLUGINDIR="${HERE}"/usr/lib/gimp/2.0/
-export GIMP3_DATADIR="${HERE}"/usr/share/gimp/2.99/
-export GIMP3_SYSCONFDIR="${HERE}"/etc/gimp/2.99/
-export GIMP3_PLUGINDIR="${HERE}"/usr/lib/gimp/2.99/
-export GEGL_PATH="${HERE}"/usr/lib/i386-linux-gnu/gegl-0.4/
-export BABL_PATH="${HERE}"/usr/lib/i386-linux-gnu/babl-0.1/
-EXEC=$(grep -e '$function1' "${HERE}"/*.desktop | head -n 1 | cut -d "=" -f 2- | sed -e '$function2')
-exec ${EXEC} "$@"' >> AppRun
-chmod a+x AppRun
-cp ./AppRun /opt/$APP/
-cp ./AppRun ./$APP/$APP.AppDir/
+wget https://raw.githubusercontent.com/ivan-hc/GIMP-appimage/main/AppRun -P ./$APP/$APP.AppDir/
+chmod a+x ./$APP/$APP.AppDir/AppRun
+cp ./$APP/$APP.AppDir/AppRun /opt/$APP/
 
 ARCH=i386 ./appimagetool -n ./$APP/$APP.AppDir;
 underscore=_
