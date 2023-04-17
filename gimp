@@ -47,36 +47,9 @@ cp /opt/$APP/tmp/recipe.yml /opt/$APP/recipe.yml
 ./pkg2appimage ./recipe.yml;
 
 rm -R -f ./$APP/$APP.AppDir/AppRun
-echo '#!/bin/sh
-HERE="$(dirname "$(readlink -f "${0}")")"
-#echo "HERE:'\''$HERE'\''"
-cd ${HERE}
-export UNION_PRELOAD="${HERE}"
-LIBS=:$(find . -type f -name "libgimpwidgets*"):$(find . -type f -name "libgimpbase*"):$(find . -type f -name "libgimpcolor*"):$(find . -type f -name "libgimpconfig*"):$(find . -type f -name "libgegl-0*"):$(find . -type f -name "libbabl*so*"):$(find . -type f -name "libgexiv*"):$(find . -type f -name "libgimpmath*"):$(find . -type f -name "libexiv*"):$(find . -type f -name "libgimpthumb*"):$(find . -type f -name "libgimpmodule*"):$(find . -type f -name "libmypaint*so*"):$(find . -type f -name "libjson-c*"):$(find . -type f -name "libgimp-2*"):$(find . -type f -name "libgimpui*")
-#echo "LIBS:'\''$LIBS'\''"
-export LD_PRELOAD=`echo $LIBS | sed '\''s|:|:'\''${HERE}'\''/|g'\'' | sed '\''s|/\./|/|g'\'' | sed '\''s|^:||g'\''`
-#echo "LD_PRELOAD:'\''$LD_PRELOAD'\''"
-export PATH=/bin:/usr/bin:/usr/local/bin:/sbin:"${HERE}"/usr/bin:"${HERE}"/usr/sbin:"${HERE}"/usr/games:"${HERE}"/bin:"${HERE}"/opt/gimp:"${HERE}"/sbin:"${PATH}"
-#echo "PATH:'\''$PATH'\''"
-export LD_LIBRARY_PATH=/lib64:/usr/lib:/lib:/usr/lib/x86_64-linux-gnu:/lib/x86_64-linux-gnu/"${HERE}"/usr/lib:"${HERE}"/usr/lib/gimp:"${HERE}"/usr/lib/i386-linux-gnu:"${HERE}"/usr/lib/x86_64-linux-gnu:"${HERE}"/lib:"${HERE}"/lib/i386-linux-gnu:"${HERE}"/lib/x86_64-linux-gnu:"${LD_LIBRARY_PATH}"
-#echo "LD_LIBRARY_PATH:'\''$LD_LIBRARY_PATH'\''"
-export PKG_CONFIG_PATH="${HERE}"/usr/share/pkgconfig:$PKG_CONFIG_PATH
-export GIMP2_LOCALEDIR="${HERE}/usr/share/locale"
-export GIMP3_LOCALEDIR="${HERE}/usr/share/locale"
-export GIMP2_DATADIR="${HERE}"/usr/share/gimp/2.0/
-export GIMP2_SYSCONFDIR="${HERE}"/etc/gimp/2.0/
-export GIMP2_PLUGINDIR="${HERE}"/usr/lib/gimp/2.0/
-export GIMP3_DATADIR="${HERE}"/usr/share/gimp/2.99/
-export GIMP3_SYSCONFDIR="${HERE}"/etc/gimp/2.99/
-export GIMP3_PLUGINDIR="${HERE}"/usr/lib/gimp/2.99/
-export GEGL_PATH="${HERE}"/usr/lib/x86_64-linux-gnu/gegl-0.4/
-export BABL_PATH="${HERE}"/usr/lib/x86_64-linux-gnu/babl-0.1/
-EXEC=$(grep -e '\''^Exec=.*'\'' "${HERE}"/*.desktop | head -n 1 | cut -d "=" -f 2- | sed -e '\''s| %.||g'\'')
-#echo "EXEC:'\''$EXEC'\''"
-exec ${HERE}/usr/bin/${EXEC} "$@"' >> AppRun
-chmod a+x AppRun
-cp ./AppRun /opt/$APP/
-cp ./AppRun ./$APP/$APP.AppDir/
+wget https://raw.githubusercontent.com/ivan-hc/GIMP-appimage/main/AppRun -P ./$APP/$APP.AppDir/
+chmod a+x ./$APP/$APP.AppDir/AppRun
+cp ./$APP/$APP.AppDir/AppRun /opt/$APP/
 
 ARCH=x86_64 ./appimagetool -n ./$APP/$APP.AppDir;
 underscore=_
