@@ -1,0 +1,18 @@
+#!/bin/sh
+HERE="$(dirname "$(readlink -f "${0}")")"
+export UNION_PRELOAD="${HERE}"
+export PATH="${HERE}"/usr/bin/:"${HERE}"/usr/sbin/:"${HERE}"/usr/games/:"${HERE}"/bin/:"${HERE}"/sbin/:"${PATH}"
+export LD_LIBRARY_PATH=/lib64:/usr/lib:/lib:/usr/lib/x86_64-linux-gnu:/lib/x86_64-linux-gnu/"${HERE}"/usr/lib/:"${HERE}"/usr/lib/i386-linux-gnu/:"${HERE}"/usr/lib/x86_64-linux-gnu/:"${HERE}"/usr/lib32/:"${HERE}"/usr/lib64/:"${HERE}"/lib/:"${HERE}"/lib/i386-linux-gnu/:"${HERE}"/lib/x86_64-linux-gnu/:"${HERE}"/lib32/:"${HERE}"/lib64/:"${LD_LIBRARY_PATH}"
+export PKG_CONFIG_PATH="${HERE}"/usr/share/pkgconfig:$PKG_CONFIG_PATH
+export GIMP2_LOCALEDIR="${HERE}"/usr/share/locale/
+export GIMP2_DATADIR="${HERE}"/usr/share/gimp/2.0/
+export GIMP2_SYSCONFDIR="${HERE}"/etc/gimp/2.0/
+export GIMP2_PLUGINDIR="${HERE}"/usr/lib/gimp/2.0/
+export GIMP3_LOCALEDIR="${HERE}"/usr/share/locale/
+export GIMP3_DATADIR="${HERE}"/usr/share/gimp/2.99/
+export GIMP3_SYSCONFDIR="${HERE}"/etc/gimp/2.99/
+export GIMP3_PLUGINDIR="${HERE}"/usr/lib/gimp/2.99/
+export GEGL_PATH="${HERE}"/usr/lib/x86_64-linux-gnu/gegl-0.4/
+export BABL_PATH="${HERE}"/usr/lib/x86_64-linux-gnu/babl-0.1/
+EXEC=$(grep -e '^Exec=.*' "${HERE}"/*.desktop | head -n 1 | cut -d "=" -f 2- | sed -e 's| %.||g')
+exec ${HERE}/usr/bin/${EXEC} "$@"
