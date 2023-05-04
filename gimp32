@@ -36,6 +36,8 @@ ingredients:
 
 rm -R -f ./$APP/$APP.AppDir/AppRun
 wget https://raw.githubusercontent.com/ivan-hc/GIMP-appimage/main/AppRun -P ./$APP/$APP.AppDir/
+sed -i 's/x86_64/i386/g' ./$APP/$APP.AppDir/AppRun
+sed -i 's/64/x32/g' ./$APP/$APP.AppDir/AppRun
 chmod a+x ./$APP/$APP.AppDir/AppRun
 
 ARCH=i386 ./appimagetool -n ./$APP/$APP.AppDir
