@@ -19,6 +19,7 @@ jobs:
       run: |
         sudo apt update
         sudo apt install libfuse2
+        rm -R -f ./tmp
         wget https://raw.githubusercontent.com/ivan-hc/GIMP-appimage/main/debian/testing/gimp
         wget https://raw.githubusercontent.com/ivan-hc/GIMP-appimage/main/debian/experimental/gimp-dev
         chmod a+x ./gimp
@@ -26,6 +27,7 @@ jobs:
         ./gimp
         rm -R -f ./tmp
         ./gimp-dev
+        rm -R -f ./tmp
         mkdir dist
         mv *AppImage dist/
 
