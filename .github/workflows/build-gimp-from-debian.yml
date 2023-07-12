@@ -34,7 +34,7 @@ jobs:
     - name: Upload artifact
       uses: actions/upload-artifact@v1.0.0
       with:
-        name: GIMP-x86_64.AppImage
+        name: GIMP-Debian-x86_64.AppImage
         path: 'dist'
         
   release:
@@ -45,7 +45,7 @@ jobs:
       steps:
         - uses: actions/download-artifact@v1
           with:
-            name: GIMP-x86_64.AppImage
+            name: GIMP-Debian-x86_64.AppImage
 
         - name: release
           uses: marvinpinto/action-automatic-releases@latest
@@ -55,5 +55,5 @@ jobs:
             prerelease: true
             draft: false
             files: |
-              GIMP-x86_64.AppImage
+              GIMP-Debian-x86_64.AppImage
             repo_token: ${{ secrets.GITHUB_TOKEN }}
