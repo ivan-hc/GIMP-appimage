@@ -16,16 +16,13 @@ jobs:
     - name: build
       run: |
         sudo apt update && sudo apt install libfuse2
-        wget https://raw.githubusercontent.com/ivan-hc/GIMP-appimage/main/gimp
-        wget https://raw.githubusercontent.com/ivan-hc/GIMP-appimage/main/gimp-dev
+        wget https://raw.githubusercontent.com/ivan-hc/GIMP-appimage/main/ppa/gimp
+        wget https://raw.githubusercontent.com/ivan-hc/GIMP-appimage/main/ppa/gimp-dev
         chmod a+x ./gimp ./gimp-dev
-        sudo ./gimp
-        sudo ./gimp-dev
+        ./gimp
+        ./gimp-dev
         mkdir dist
-        VERSION=$(curl -sL https://ppa.launchpadcontent.net/savoury1/gimp/ubuntu/pool/main/g/gimp/ | grep -Po '(?<=href=")[^"]*(?=")' | grep gimp_ | grep 18.04 | head -1 | cut -f1 -d "-" | grep -Eo "[0-9]+([.][0-9]+)?+[+-]?[0-9]?")
-        mv /opt/gimp/gimp dist/GNU_Image_Manipulation_Program-$VERSION-x86_64.AppImage
-        DEVERSION=$(curl -sL https://ppa.launchpadcontent.net/mati75/gimp30/ubuntu/pool/main/g/gimp/ | grep -Po '(?<=href=")[^"]*(?=")' | grep gimp_ | grep 20.04 | head -1 | cut -f1 -d "~" | grep -Eo "[0-9]+([.][0-9]+)?+[+-]?+[0-9]?+[.]?+[0-9]?")
-        mv /opt/gimp-dev/gimp-dev dist/GNU_Image_Manipulation_Program-DEV-$DEVERSION-x86_64.AppImage
+        mv *AppImage dist/
 
     - name: Upload artifact
       uses: actions/upload-artifact@v1.0.0
