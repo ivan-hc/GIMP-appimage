@@ -1,8 +1,13 @@
-This repository provides the scripts to create the latest version of GIMP (for Ubuntu 18.04+) from https://launchpad.net/~savoury1 and the latest GIMP Developer Edition (for Ubuntu 20.04+) from https://launchpad.net/~mati75, and AppImage packages ready to be used.
+This repository provides the scripts to create the latest versions of GIMP and AppImage packages ready to be used:
+
+- GIMP Stable is built on top of [JuNest](https://github.com/fsquillace/junest) to work on any other GNU/Linux distribution (see [ArchImage](https://github.com/ivan-hc/ArchImage));
+- GIMP Developer Edition instead is built on top of Ubuntu 20.04 using a [PPA](https://launchpad.net/~mati75).
 
 Download the latest version from here:
 
 https://github.com/ivan-hc/GIMP-appimage/releases/tag/continuous
+
+Browsing the repository you will find other interesting scripts you may be interested in.
 
 # How to integrate GIMP AppImage into the system
 The easier way is to install "AM" on your PC, see [ivan-hc/AM-application-manager](https://github.com/ivan-hc/AM-application-manager) for more.
@@ -32,27 +37,5 @@ To install the Dev Edition, run:
 ### Uninstall
 
     sudo /opt/gimp-dev/remove
-
-------------------------------------
-# About Rob Savoury's PPA 
-SITE: https://launchpad.net/~savoury1
-
-This is a collection of PPAs giving significant upgrades for the past 6+ years of Ubuntu (LTS) releases. Popular software here: Blender, Chromium, digiKam, FFmpeg, GIMP, GPG, Inkscape, LibreOffice, mpv, Scribus, Telegram, and VLC.
-
-***"SavOS project 3 year milestones: 20,000 uploads and 20,000 users"***
-               https://medium.com/@RobSavoury/bade09fa042e
-
-Fun stats: Over 23,000 uploads since August 2019 of 5,100 unique packages!
-(3 Nov 2022) With now 460+ unique packages published for 22.04 Jammy LTS, 1,730+ for 20.04 Focal LTS, and a whole lot extra for Xenial & Bionic LTS!
-
-If software at this site is useful to you then please consider a donation:
-
-***Donations: https://paypal.me/Savoury1 & https://ko-fi.com/Savoury1***
-
-***Also https://patreon.com/Savoury1 & https://liberapay.com/Savoury1***
-
-UPDATE (8 May 2022): See new https://twitter.com/RobSavoury for updates on the many Launchpad PPAs found here, ie. new packages built, bugfixes, etc.
-
-***Bugs: File bug reports @ https://bugs.launchpad.net/SavOS/+filebug***
-
-[ "SavOS" is the project heading for all packages at https://launchpad.net/~savoury1 ]
+## Transition from PPA to ArchImage
+I'm planning to switch from PPA based AppImages to the new "ArchImage" model, see https://github.com/ivan-hc/GIMP-appimage/issues/10 for more details.
