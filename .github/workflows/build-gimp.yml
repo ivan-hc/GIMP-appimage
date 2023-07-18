@@ -18,10 +18,12 @@ jobs:
       run: |
         sudo apt update && sudo apt install libfuse2
         wget https://raw.githubusercontent.com/ivan-hc/GIMP-appimage/main/gimp-junest.sh
-        wget https://raw.githubusercontent.com/ivan-hc/GIMP-appimage/main/ppa/gimp-dev
-        chmod a+x ./gimp-junest.sh ./gimp-dev
+        wget https://raw.githubusercontent.com/ivan-hc/GIMP-appimage/main/gimp-dev-junest.sh
+        chmod a+x ./gimp-junest.sh ./gimp-dev-junest.sh
         ./gimp-junest.sh
-        ./gimp-dev
+        rm -R -f ./.local/share/junest
+        rm -R -f ./.junest
+        ./gimp-dev-junest.sh
         mkdir dist
         mv *AppImage dist/
 
