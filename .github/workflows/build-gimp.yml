@@ -17,13 +17,20 @@ jobs:
       if: always()
       run: |
         sudo apt update && sudo apt install libfuse2
+        mkdir tmp
+        cd tmp
         wget https://raw.githubusercontent.com/ivan-hc/GIMP-appimage/main/gimp-junest.sh
-        wget https://raw.githubusercontent.com/ivan-hc/GIMP-appimage/main/gimp-dev-junest.sh
-        chmod a+x ./gimp-junest.sh ./gimp-dev-junest.sh
+        chmod a+x ./gimp-junest.sh
         ./gimp-junest.sh
-        rm -R -f ./.local/share/junest
-        rm -R -f ./.junest
+        cd ..
+        mv ./tmp/*AppImage ./
+        mkdir tmp2
+        cd tmp2
+        wget https://raw.githubusercontent.com/ivan-hc/GIMP-appimage/main/gimp-dev-junest.sh
+        chmod a+x ./gimp-dev-junest.sh
         ./gimp-dev-junest.sh
+        cd ..
+        mv ./tmp2/*AppImage ./
         mkdir dist
         mv *AppImage dist/
 
