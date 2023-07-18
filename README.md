@@ -1,13 +1,13 @@
-This repository provides the scripts to create the latest versions of GIMP and AppImage packages ready to be used:
+This repository provides the scripts to create the latest versions of GIMP Stable and Developer Edition using both JuNest and PPAs) and AppImage packages built on top of JuNest ready to be used on any GNU/Linux distribution:
 
-- GIMP Stable is built on top of [JuNest](https://github.com/fsquillace/junest) to work on any other GNU/Linux distribution (see [ArchImage](https://github.com/ivan-hc/ArchImage));
-- GIMP Developer Edition instead is built on top of Ubuntu 20.04 using a [PPA](https://launchpad.net/~mati75).
+## Tools
+- JuNest, at https://github.com/fsquillace/junest
+- ArchImage, at https://github.com/ivan-hc/ArchImage
 
+### Downloads
 Download the latest version from here:
 
 https://github.com/ivan-hc/GIMP-appimage/releases/tag/continuous
-
-Browsing the repository you will find other interesting scripts you may be interested in.
 
 # How to integrate GIMP AppImage into the system
 The easier way is to install "AM" on your PC, see [ivan-hc/AM-application-manager](https://github.com/ivan-hc/AM-application-manager) for more.
@@ -37,5 +37,11 @@ To install the Dev Edition, run:
 ### Uninstall
 
     sudo /opt/gimp-dev/remove
+
 ## Transition from PPA to ArchImage
-I'm planning to switch from PPA based AppImages to the new "ArchImage" model, see https://github.com/ivan-hc/GIMP-appimage/issues/10 for more details.
+JuNest-based AppImages have more compatibility with much older systems. Compiling these so-called "ArchImages" is easier and the Arch Linux base is a guarantee of continuity being one of the most important GNU/Linux distributions, supported by a large community that offers more guarantees of continuity, while usually unofficial PPAs are mantained by one or two people and built as a third-party repository for Ubuntu, a distro that is more inclined to push Snaps as official packaging format instead of DEBs.
+
+I'm switching all my PPA based AppImages to the new "ArchImage" model. (See https://github.com/ivan-hc/GIMP-appimage/issues/10 for more details).
+
+### Build GIMP from Ubuntu PPAs
+If for some particular reason the ArchImage template is not to your liking, you can try compiling PPA-based builds yourself using my scripts. Legacy scripts to build GIMP Stable and Developer Edition are available [here](https://github.com/ivan-hc/GIMP-appimage/tree/main/ppa) and the AppRun is [here](https://github.com/ivan-hc/GIMP-appimage/blob/main/AppRun).
