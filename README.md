@@ -1,10 +1,5 @@
-This repository provides the scripts to create the latest versions of GIMP Stable and Developer Edition using both JuNest and PPAs) and AppImage packages built on top of JuNest ready to be used on any GNU/Linux distribution:
+This repository provides the scripts to create the latest version of GIMP (for Ubuntu 18.04+) from https://launchpad.net/~savoury1 and the latest GIMP Developer Edition (for Ubuntu 20.04+) from https://launchpad.net/~mati75, and AppImage packages ready to be used.
 
-## Tools
-- JuNest, at https://github.com/fsquillace/junest
-- ArchImage, at https://github.com/ivan-hc/ArchImage
-
-### Downloads
 Download the latest version from here:
 
 https://github.com/ivan-hc/GIMP-appimage/releases/tag/continuous
@@ -41,7 +36,8 @@ To install the Dev Edition, run:
 ## Transition from PPA to ArchImage
 JuNest-based AppImages have more compatibility with much older systems. Compiling these so-called "ArchImages" is easier and the Arch Linux base is a guarantee of continuity being one of the most important GNU/Linux distributions, supported by a large community that offers more guarantees of continuity, while usually unofficial PPAs are mantained by one or two people and built as a third-party repository for Ubuntu, a distro that is more inclined to push Snaps as official packaging format instead of DEBs.
 
-I'm switching all my PPA based AppImages to the new "ArchImage" model. (See https://github.com/ivan-hc/GIMP-appimage/issues/10 for more details).
+Learm more about:
+- JuNest, at https://github.com/fsquillace/junest
+- ArchImage, at https://github.com/ivan-hc/ArchImage
 
-### Build GIMP from Ubuntu PPAs
-If for some particular reason the ArchImage template is not to your liking, you can try compiling PPA-based builds yourself using my scripts. Legacy scripts to build GIMP Stable and Developer Edition are available [here](https://github.com/ivan-hc/GIMP-appimage/tree/main/ppa) and the AppRun is [here](https://github.com/ivan-hc/GIMP-appimage/blob/main/AppRun).
+I'm switching all my PPA based AppImages to the new "ArchImage" model. (See https://github.com/ivan-hc/GIMP-appimage/issues/10 for more details).
