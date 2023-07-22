@@ -14,13 +14,23 @@ jobs:
     steps:
     - uses: actions/checkout@v3
     - name: build
+      if: always()
       run: |
         sudo apt update && sudo apt install libfuse2
-        wget https://raw.githubusercontent.com/ivan-hc/GIMP-appimage/main/ppa/gimp
-        wget https://raw.githubusercontent.com/ivan-hc/GIMP-appimage/main/ppa/gimp-dev
-        chmod a+x ./gimp ./gimp-dev
-        ./gimp
-        ./gimp-dev
+        mkdir tmp
+        cd tmp
+        wget https://raw.githubusercontent.com/ivan-hc/GIMP-appimage/main/gimp-junest.sh
+        chmod a+x ./gimp-junest.sh
+        ./gimp-junest.sh
+        cd ..
+        mv ./tmp/*AppImage ./
+        mkdir tmp2
+        cd tmp2
+        wget https://raw.githubusercontent.com/ivan-hc/GIMP-appimage/main/gimp-dev-junest.sh
+        chmod a+x ./gimp-dev-junest.sh
+        ./gimp-dev-junest.sh
+        cd ..
+        mv ./tmp2/*AppImage ./
         mkdir dist
         mv *AppImage dist/
 
@@ -32,6 +42,7 @@ jobs:
 
   release:
       needs: [build]
+      permissions: write-all
       runs-on: ubuntu-latest
 
       steps:
@@ -42,7 +53,7 @@ jobs:
         - name: release
           uses: marvinpinto/action-automatic-releases@latest
           with:
-            title: Continuous build
+            title: GIMP Stable/Dev continuous builds (JuNest)
             automatic_release_tag: continuous
             prerelease: false
             draft: false
