@@ -53,7 +53,7 @@ jobs:
         - name: release
           uses: marvinpinto/action-automatic-releases@latest
           with:
-            title: GIMP Stable/Dev continuous builds (JuNest)
+            title: Continuous builds (JuNest Arch Linux-based AppImages)
             automatic_release_tag: continuous
             prerelease: false
             draft: false
