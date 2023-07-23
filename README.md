@@ -23,6 +23,13 @@ The easier way install at system level the AppImages is to use "AM", alternative
 or visit the site ***https://portable-linux-apps.github.io***
 
 -------------------------
+### *Add plugins*
+For the build based on JuNest, the inbuilt command "`gimptool`" is enabled as an option. To use it:
+
+    ./*.AppImage gimptool [options]
+See "3.1 Manual installation" at https://wiki.archlinux.org/title/GIMP#Plugins
+
+-------------------------
 ### *Special Credits*
 - JuNest https://github.com/fsquillace/junest
 - Arch Linux https://archlinux.org
