@@ -29,6 +29,8 @@ For the build based on JuNest, the inbuilt command "`gimptool`" is enabled as an
     ./*.AppImage gimptool [options]
 See "3.1 Manual installation" at https://wiki.archlinux.org/title/GIMP#Plugins
 
+You can also manually add plugins by placing them in the appropriate directories in `$HOME/.config` and `$HOME/.local`
+
 -------------------------
 ### *Special Credits*
 - JuNest https://github.com/fsquillace/junest
