@@ -3,7 +3,7 @@
 # NAME OF THE APP BY REPLACING "SAMPLE"
 APP=gimp-devel
 BIN="gimp" #CHANGE THIS IF THE NAME OF THE BINARY IS DIFFERENT FROM "$APP" (for example, the binary of "obs-studio" is "obs")
-DEPENDENCES="nspr sdl2"
+DEPENDENCES="python nspr sdl2"
 BASICSTUFF="binutils gzip"
 #COMPILERS="gcc"
 
@@ -101,10 +101,12 @@ export UNION_PRELOAD=$HERE
 export JUNEST_HOME=$HERE/.junest
 export PATH=$HERE/.local/share/junest/bin/:$PATH
 mkdir -p $HOME/.cache
-$HERE/.local/share/junest/bin/junest proot -n -b "--bind=/home --bind=/home/$(echo $USER) --bind=/media --bind=/mnt --bind=/opt --bind=/usr/lib/locale --bind=/etc/fonts" 2> /dev/null -- BINARY "$@"
+case "$1" in
+	gimptool) $HERE/.local/share/junest/bin/junest proot -n -b "--bind=/home --bind=/home/$(echo $USER) --bind=/media --bind=/mnt --bind=/opt --bind=/usr/lib/locale --bind=/etc/fonts" 2> /dev/null -- gimptool "$@";;
+	*) $HERE/.local/share/junest/bin/junest proot -n -b "--bind=/home --bind=/home/$(echo $USER) --bind=/media --bind=/mnt --bind=/opt --bind=/usr/lib/locale --bind=/etc/fonts" 2> /dev/null -- gimp "$@";;
+esac
 EOF
 chmod a+x ./$APP.AppDir/AppRun
-sed -i "s#BINARY#$BIN#g" ./$APP.AppDir/AppRun
 
 # REMOVE "READ-ONLY FILE SYSTEM" ERRORS
 sed -i 's#${JUNEST_HOME}/usr/bin/junest_wrapper#${HOME}/.cache/junest_wrapper.old#g' ./$APP.AppDir/.local/share/junest/lib/core/wrappers.sh
@@ -1221,7 +1223,7 @@ rm -R -f ./$APP.AppDir/.junest/usr/lib/libitm.spec
 rm -R -f ./$APP.AppDir/.junest/usr/lib/libLLVM*
 rm -R -f ./$APP.AppDir/.junest/usr/lib/liblsan_preinit.o
 rm -R -f ./$APP.AppDir/.junest/usr/lib/libOSMesa.*
-rm -R -f ./$APP.AppDir/.junest/usr/lib/libPyImath_Python*
+#rm -R -f ./$APP.AppDir/.junest/usr/lib/libPyImath_Python*
 rm -R -f ./$APP.AppDir/.junest/usr/lib/libsanitizer.spec
 rm -R -f ./$APP.AppDir/.junest/usr/lib/libstdc++.a
 rm -R -f ./$APP.AppDir/.junest/usr/lib/libstdc++exp.a
@@ -1235,7 +1237,7 @@ rm -R -f ./$APP.AppDir/.junest/usr/lib/perl*
 rm -R -f ./$APP.AppDir/.junest/usr/lib/pkgconfig
 rm -R -f ./$APP.AppDir/.junest/usr/lib/pkgconfig/*
 rm -R -f ./$APP.AppDir/.junest/usr/lib/pkgconfig/libalpm.pc
-rm -R -f ./$APP.AppDir/.junest/usr/lib/python*
+#rm -R -f ./$APP.AppDir/.junest/usr/lib/python*
 rm -R -f ./$APP.AppDir/.junest/usr/lib/security
 rm -R -f ./$APP.AppDir/.junest/usr/lib/sys*
 rm -R -f ./$APP.AppDir/.junest/usr/lib/systemd/system/git-daemon@.service
