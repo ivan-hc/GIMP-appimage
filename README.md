@@ -32,6 +32,15 @@ See "3.1 Manual installation" at https://wiki.archlinux.org/title/GIMP#Plugins
 You can also manually add plugins by placing them in the appropriate directories in `$HOME/.config` and `$HOME/.local`
 
 -------------------------
+### Reduce the size of the JuNest based Appimage
+You can analyze the presence of excess files inside the AppImage by extracting it:
+
+    ./*.AppImage --appimage-extract
+To start your tests, run the "AppRun" script inside the "squashfs-root" folder extracted from the AppImage:
+
+    ./squashfs-root/AppRun
+
+-------------------------
 ### *Special Credits*
 - JuNest https://github.com/fsquillace/junest
 - Arch Linux https://archlinux.org
