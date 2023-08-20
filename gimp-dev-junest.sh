@@ -1,18 +1,15 @@
 #!/bin/sh
 
 # NAME OF THE APP BY REPLACING "SAMPLE"
-APP=gimp-devel
+APP=gimp-git
 BIN="gimp" #CHANGE THIS IF THE NAME OF THE BINARY IS DIFFERENT FROM "$APP" (for example, the binary of "obs-studio" is "obs")
 DEPENDENCES="python nspr sdl2"
 BASICSTUFF="binutils gzip"
 #COMPILERS="gcc"
 
 # ADD A VERSION, THIS IS NEEDED FOR THE NAME OF THE FINEL APPIMAGE, IF NOT AVAILABLE ON THE REPO, THE VALUE COME FROM AUR, AND VICE VERSA
-for REPO in { "core" "extra" "community" "multilib" }; do
-echo "$(wget -q https://archlinux.org/packages/$REPO/x86_64/$APP/flag/ -O - | grep $APP | grep details | head -1 | grep -o -P '(?<=/a> ).*(?= )' | grep -o '^\S*')" >> version
-done
-VERSION=$(cat ./version | grep -w -v "" | head -1)
-VERSIONAUR=$(wget -q https://aur.archlinux.org/cgit/aur.git/plain/PKGBUILD?h=$APP -O - | grep pkgver | head -1 | cut -c 8-)
+VERSION=$(wget -q https://builds.garudalinux.org/repos/chaotic-aur/logs/gimp-git.log -O - | grep '==> Updated version' | cut -c 22- | cut -d ':' -f 2-)
+#VERSIONAUR=$(wget -q https://aur.archlinux.org/cgit/aur.git/plain/PKGBUILD?h=$APP -O - | grep pkgver | head -1 | cut -c 8-)
 
 # THIS WILL DO ALL WORK INTO THE CURRENT DIRECTORY
 HOME="$(dirname "$(readlink -f $0)")" 
@@ -21,10 +18,18 @@ HOME="$(dirname "$(readlink -f $0)")"
 git clone https://github.com/fsquillace/junest.git ~/.local/share/junest
 ./.local/share/junest/bin/junest setup
 
-# ENABLE MULTILIB (optional)
+# ENABLE CHAOTIC-AUR
+./.local/share/junest/bin/junest -- sudo pacman-key --recv-key 3056513887B78AEB --keyserver keyserver.ubuntu.com
+./.local/share/junest/bin/junest -- sudo pacman-key --lsign-key 3056513887B78AEB
+./.local/share/junest/bin/junest -- sudo pacman --noconfirm -U 'https://cdn-mirror.chaotic.cx/chaotic-aur/chaotic-keyring.pkg.tar.zst' 'https://cdn-mirror.chaotic.cx/chaotic-aur/chaotic-mirrorlist.pkg.tar.zst'
+
+# ENABLE MULTILIB (optional) AND CHAOTIC-AUR
 echo "
 [multilib]
-Include = /etc/pacman.d/mirrorlist" >> ./.junest/etc/pacman.conf
+Include = /etc/pacman.d/mirrorlist
+
+[chaotic-aur]
+Include = /etc/pacman.d/chaotic-mirrorlist" >> ./.junest/etc/pacman.conf
 
 # CUSTOM MIRRORLIST, THIS SHOULD SPEEDUP THE INSTALLATION OF THE PACKAGES IN PACMAN (COMMENT EVERYTHING TO USE THE DEFAULT MIRROR)
 COUNTRY=$(curl -i ipinfo.io | grep country | cut -c 15- | cut -c -2)
@@ -101,9 +106,10 @@ export UNION_PRELOAD=$HERE
 export JUNEST_HOME=$HERE/.junest
 export PATH=$HERE/.local/share/junest/bin/:$PATH
 mkdir -p $HOME/.cache
+EXEC=$(grep -e '^Exec=.*' "${HERE}"/*.desktop | head -n 1 | cut -d "=" -f 2- | sed -e 's|%.||g')
 case "$1" in
-	gimptool) $HERE/.local/share/junest/bin/junest proot -n -b "--bind=/home --bind=/home/$(echo $USER) --bind=/media --bind=/mnt --bind=/opt --bind=/usr/lib/locale --bind=/etc/fonts" 2> /dev/null -- gimptool "$@";;
-	*) $HERE/.local/share/junest/bin/junest proot -n -b "--bind=/home --bind=/home/$(echo $USER) --bind=/media --bind=/mnt --bind=/opt --bind=/usr/lib/locale --bind=/etc/fonts" 2> /dev/null -- gimp "$@";;
+	gimptool) $HERE/.local/share/junest/bin/junest proot -n -b "--bind=/home --bind=/home/$(echo $USER) --bind=/media --bind=/mnt --bind=/opt --bind=/usr/lib/locale --bind=/etc/fonts" 2> /dev/null -- $(echo $EXEC | sed s/-/tool-/g) "$@";;
+	*) $HERE/.local/share/junest/bin/junest proot -n -b "--bind=/home --bind=/home/$(echo $USER) --bind=/media --bind=/mnt --bind=/opt --bind=/usr/lib/locale --bind=/etc/fonts" 2> /dev/null -- $EXEC "$@";;
 esac
 EOF
 chmod a+x ./$APP.AppDir/AppRun
@@ -1293,4 +1299,4 @@ mkdir -p ./$APP.AppDir/.junest/media
 
 # CREATE THE APPIMAGE
 ARCH=x86_64 ./appimagetool -n ./$APP.AppDir
-mv ./*AppImage ./"$(cat ./$APP.AppDir/*.desktop | grep 'Name=' | head -1 | cut -c 6- | sed 's/ /-/g')"_DEV_"$VERSIONAUR"-x86_64.AppImage
+mv ./*AppImage ./"$(cat ./$APP.AppDir/*.desktop | grep 'Name=' | head -1 | cut -c 6- | sed 's/ /-/g')"_DEV_"$VERSION"-x86_64.AppImage
