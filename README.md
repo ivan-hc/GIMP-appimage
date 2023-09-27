@@ -18,7 +18,7 @@ Learn more about ArchImage packaging at https://github.com/ivan-hc/ArchImage
 ### *How to integrate GIMP AppImage into the system*
 The easier way install at system level the AppImages is to use "AM", alternativelly you can use "AppMan" to install them locally and without root privileges. Learn more about:
 - "AM" https://github.com/ivan-hc/AM-application-manager
-- AppMan https://github.com/ivan-hc/AM-application-manager
+- AppMan https://github.com/ivan-hc/AppMan
 
 or visit the site ***https://portable-linux-apps.github.io***
 
