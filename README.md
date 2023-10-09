@@ -1,5 +1,7 @@
 This repository provides Unofficial AppImages of GIMP Stable and GIMP Developer Edition built on top of [JuNest](https://github.com/fsquillace/junest) (and other prototipes built from PPAs) and the scripts to built them.
 
+*NOTE: the 32-bit version for the old i386 architectures is available at [ivan-hc/32-bit-AppImage-packages-database](https://github.com/ivan-hc/32-bit-AppImage-packages-database), download it from [here](https://github.com/ivan-hc/32-bit-AppImage-packages-database/releases/tag/gimp).*
+
 -------------------------
 ### Downloads
 Continuous builds based on JuNest* are released each Sunday, you can download them from:
