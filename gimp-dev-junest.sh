@@ -8,7 +8,7 @@ BASICSTUFF="binutils gzip"
 #COMPILERS="gcc"
 
 # ADD A VERSION, THIS IS NEEDED FOR THE NAME OF THE FINEL APPIMAGE, IF NOT AVAILABLE ON THE REPO, THE VALUE COME FROM AUR, AND VICE VERSA
-VERSION=$(wget -q https://builds.garudalinux.org/repos/chaotic-aur/logs/gimp-git.log -O - | grep '==> Updated version' | cut -c 22- | cut -d ':' -f 2-)
+CHAOTICVERSION=$(wget -q https://builds.garudalinux.org/repos/chaotic-aur/logs/gimp-git.log -O - | grep '==> Updated version' | cut -c 22- | cut -d ':' -f 2-)
 #VERSIONAUR=$(wget -q https://aur.archlinux.org/cgit/aur.git/plain/PKGBUILD?h=$APP -O - | grep pkgver | head -1 | cut -c 8-)
 
 # THIS WILL DO ALL WORK INTO THE CURRENT DIRECTORY
@@ -1299,4 +1299,4 @@ mkdir -p ./$APP.AppDir/.junest/media
 
 # CREATE THE APPIMAGE
 ARCH=x86_64 ./appimagetool -n ./$APP.AppDir
-mv ./*AppImage ./"$(cat ./$APP.AppDir/*.desktop | grep 'Name=' | head -1 | cut -c 6- | sed 's/ /-/g')"_DEV_"$VERSION"-x86_64.AppImage
+mv ./*AppImage ./"$(cat ./$APP.AppDir/*.desktop | grep 'Name=' | head -1 | cut -c 6- | sed 's/ /-/g')"_DEV_$(echo "$CHAOTICVERSION")-x86_64.AppImage
