@@ -6,7 +6,8 @@ This repository provides Unofficial AppImages of GIMP Stable and GIMP Developer 
 ### Downloads
 Continuous builds based on JuNest* are released each Sunday, you can download them from:
 
-***https://github.com/ivan-hc/GIMP-appimage/releases/tag/continuous*** 
+- **Stable** (Latest) ***https://github.com/ivan-hc/GIMP-appimage/releases/tag/continuous-stable*** 
+- **Developer Edition** (Pre-release) ***https://github.com/ivan-hc/GIMP-appimage/releases/tag/continuous-dev***
 
 JuNest-based AppImages have more compatibility with much older systems. 
 
