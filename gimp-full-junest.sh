@@ -184,7 +184,7 @@ _savebins(){
  	mv ./base/usr/bin/* ./$APP.AppDir/.junest/usr/bin/
 	rmdir save
 }
-_savebins
+#_savebins
 
 # STEP 3, MOVE UNNECESSARY LIBRARIES TO A BACKUP FOLDER (FOR TESTING PURPOSES)
 mkdir save
@@ -261,19 +261,19 @@ _mvlibs(){
  	mv ./base/usr/lib/* ./$APP.AppDir/.junest/usr/lib/
 }
 
-_binlibs
+#_binlibs
 
 #_include_swrast_dri
 
-_libkeywords
+#_libkeywords
 
-_liblibs
-_liblibs
-_liblibs
-_liblibs
-_liblibs
+#_liblibs
+#_liblibs
+#_liblibs
+#_liblibs
+#_liblibs
 
-_mvlibs
+#_mvlibs
 
 rmdir save
 
@@ -300,7 +300,7 @@ _saveshare(){
  	mv ./base/usr/share/* ./$APP.AppDir/.junest/usr/share/
 	rmdir save
 }
-_saveshare
+#_saveshare
 
 # ADDITIONAL REMOVALS
 mv ./$APP.AppDir/.junest/usr/lib/libLLVM-* ./junest-backups/usr/lib/ #INCLUDED IN THE COMPILATION PHASE, CAN SOMETIMES BE EXCLUDED FOR DAILY USE
@@ -316,4 +316,4 @@ mkdir -p ./$APP.AppDir/.junest/media
 
 # CREATE THE APPIMAGE
 ARCH=x86_64 ./appimagetool -n ./$APP.AppDir
-mv ./*AppImage ./"$(cat ./$APP.AppDir/*.desktop | grep 'Name=' | head -1 | cut -c 6- | sed 's/ /-/g')"_"$VERSION""$VERSIONAUR"-archimage2.1-3-with-plugins-x86_64.AppImage
+mv ./*AppImage ./"$(cat ./$APP.AppDir/*.desktop | grep 'Name=' | head -1 | cut -c 6- | sed 's/ /-/g')"_"$VERSION""$VERSIONAUR"-archimage2.1-3-with-plugins-FULL-JUNEST-x86_64.AppImage
