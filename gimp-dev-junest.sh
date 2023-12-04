@@ -163,10 +163,10 @@ _savebins(){
 	done
 	mv ./$APP.AppDir/.junest/usr/bin/* ./junest-backups/usr/bin/
 	mv ./save/* ./$APP.AppDir/.junest/usr/bin/
- 	mv ./base/usr/bin/* ./$APP.AppDir/.junest/usr/bin/
+ 	rsync -av ./base/usr/bin/* ./$APP.AppDir/.junest/usr/bin/
 	rmdir save
 }
-_savebins
+_savebins 2> /dev/null
 
 # STEP 3, MOVE UNNECESSARY LIBRARIES TO A BACKUP FOLDER (FOR TESTING PURPOSES)
 mkdir save
@@ -240,22 +240,22 @@ _liblibs(){
 _mvlibs(){
 	mv ./$APP.AppDir/.junest/usr/lib/* ./junest-backups/usr/lib/
 	mv ./save/* ./$APP.AppDir/.junest/usr/lib/
- 	mv ./base/usr/lib/* ./$APP.AppDir/.junest/usr/lib/
+ 	rsync -av ./base/usr/lib/* ./$APP.AppDir/.junest/usr/lib/
 }
 
-_binlibs
+_binlibs 2> /dev/null
 
-#_include_swrast_dri
+#_include_swrast_dri 2> /dev/null
 
-_libkeywords
+_libkeywords 2> /dev/null
 
-_liblibs
-_liblibs
-_liblibs
-_liblibs
-_liblibs
+_liblibs 2> /dev/null
+_liblibs 2> /dev/null
+_liblibs 2> /dev/null
+_liblibs 2> /dev/null
+_liblibs 2> /dev/null
 
-_mvlibs
+_mvlibs 2> /dev/null
 
 rmdir save
 
@@ -279,10 +279,10 @@ _saveshare(){
 	done
 	mv ./$APP.AppDir/.junest/usr/share/* ./junest-backups/usr/share/
 	mv ./save/* ./$APP.AppDir/.junest/usr/share/
- 	mv ./base/usr/share/* ./$APP.AppDir/.junest/usr/share/
+ 	rsync -av ./base/usr/share/* ./$APP.AppDir/.junest/usr/share/
 	rmdir save
 }
-_saveshare
+_saveshare 2> /dev/null
 
 # ADDITIONAL REMOVALS
 mv ./$APP.AppDir/.junest/usr/lib/libLLVM-* ./junest-backups/usr/lib/ #INCLUDED IN THE COMPILATION PHASE, CAN SOMETIMES BE EXCLUDED FOR DAILY USE
