@@ -4,6 +4,7 @@ This repository provides Unofficial AppImages of GIMP built on top of [JuNest](h
 - [GIMP flavors: what to choose?](#gimp-flavors-what-to-choose)
   - [Stable, the one you may want the most](#stable-the-one-you-may-want-the-most)
   - [Developer Edition, for brave hearts](#developer-edition-for-brave-hearts)
+  - [GIT, the daily builds](#git-the-daily-builds)
   - [Hybrid? What is this?](#hybrid-what-is-this)
 - [Usage](#usage)
   - [Add plugins](#add-plugins)
@@ -37,8 +38,15 @@ To build this AppImage I've used the package "gimp-git" from ChaoticAUR (see htt
 #### Download it using the tag [continuous-dev](https://github.com/ivan-hc/GIMP-appimage/releases/tag/continuous-dev):
 - https://github.com/ivan-hc/GIMP-appimage/releases/tag/continuous-dev
 
--------------------------- 
+---------------------------
 
+## GIT, the daily builds
+GIMP "GIT" is built from source using the AUR package "gimp-git" (see https://aur.archlinux.org/packages/gimp-git). Every feature, even experimental, comes from source code, which may cause instability.
+
+#### Download it using the tag [continuous-git](https://github.com/ivan-hc/GIMP-appimage/releases/tag/continuous-git):
+- https://github.com/ivan-hc/GIMP-appimage/releases/tag/continuous-git
+
+-------------------------- 
 ## Hybrid? What is this?
 GIMP "Hybrid" is based on the "Stable" version mentioned above, but in addition will contain support for the old Python2 and many third-party plugins. 
 
