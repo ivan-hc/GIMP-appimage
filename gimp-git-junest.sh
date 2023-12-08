@@ -288,7 +288,7 @@ _saveshare 2> /dev/null
 # ADDITIONAL REMOVALS
 mv ./$APP.AppDir/.junest/usr/lib/libLLVM-* ./junest-backups/usr/lib/ #INCLUDED IN THE COMPILATION PHASE, CAN SOMETIMES BE EXCLUDED FOR DAILY USE
 rm -R -f ./$APP.AppDir/.junest/usr/lib/python*/__pycache__/* #IF PYTHON IS INSTALLED, REMOVING THIS DIRECTORY CAN SAVE SEVERAL MEGABYTES
-rm -R -f ./$APP.AppDir/.junest/.cache/*
+rm -R -f ./$APP.AppDir/.cache/*
 
 # REMOVE THE INBUILT HOME
 rm -R -f ./$APP.AppDir/.junest/home
