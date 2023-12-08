@@ -2,10 +2,10 @@ This repository provides Unofficial AppImages of GIMP built on top of [JuNest](h
 
 -------------------------
 - [GIMP flavors: what to choose?](#gimp-flavors-what-to-choose)
-  - [Stable, the one you may want the most](#stable-the-one-you-may-want-the-most)
-  - [Developer Edition, for brave hearts](#developer-edition-for-brave-hearts)
-  - [GIT, the daily builds](#git-the-daily-builds)
-  - [Hybrid? What is this?](#hybrid-what-is-this)
+  - [1. Stable, the one you may want the most](#1-stable-the-one-you-may-want-the-most)
+  - [2. Developer Edition, for brave hearts](#2-developer-edition-for-brave-hearts)
+  - [3. GIT, the daily builds](#3-git-the-daily-builds)
+  - [4. Hybrid? What is this?](#4-hybrid-what-is-this)
 - [Usage](#usage)
   - [Add plugins](#add-plugins)
 - [About JuNest-based AppImages](#about-junest-based-appimages)
@@ -19,7 +19,7 @@ This repository provides Unofficial AppImages of GIMP built on top of [JuNest](h
 In this list, you will learn more about the four main builds available in this repository.
 
 --------------------------
-## Stable, the one you may want the most
+## 1. Stable, the one you may want the most
 GIMP "Stable" is the basic version built from the official Arch Linux repositorie (see https://archlinux.org/packages/extra/x86_64/gimp ).
 
 If you have doubts about which one to use, I recommend you download this one.
@@ -28,9 +28,11 @@ If you have doubts about which one to use, I recommend you download this one.
 - https://github.com/ivan-hc/GIMP-appimage/releases/tag/continuous-stable
 - https://github.com/ivan-hc/GIMP-appimage/releases/latest
 
+The build is updated every Sunday.
+
 ---------------------------
 
-## Developer Edition, for brave hearts
+## 2. Developer Edition, for brave hearts
 GIMP "Dev" is the upcoming version with all latest features and port to the more recent technologies. 
 
 To build this AppImage I've used the package "gimp-devel" from the Arch User Repository "AUR" (see https://aur.archlinux.org/packages/gimp-devel).
@@ -38,16 +40,20 @@ To build this AppImage I've used the package "gimp-devel" from the Arch User Rep
 #### Download it using the tag [continuous-dev](https://github.com/ivan-hc/GIMP-appimage/releases/tag/continuous-dev):
 - https://github.com/ivan-hc/GIMP-appimage/releases/tag/continuous-dev
 
+The build is updated every three days.
+
 ---------------------------
 
-## GIT, the daily builds
+## 3. GIT, the daily builds
 GIMP "GIT" is built from source using the AUR package "gimp-git" (see https://aur.archlinux.org/packages/gimp-git). Every feature, even experimental, comes from source code, which may cause instability.
 
 #### Download it using the tag [continuous-git](https://github.com/ivan-hc/GIMP-appimage/releases/tag/continuous-git):
 - https://github.com/ivan-hc/GIMP-appimage/releases/tag/continuous-git
 
+The build is updated every day.
+
 -------------------------- 
-## Hybrid? What is this?
+## 4. Hybrid? What is this?
 GIMP "Hybrid" is based on the "Stable" version mentioned above, but in addition will contain support for the old Python2 and many third-party plugins. 
 
 As it stands, now it seems to be like a more bloated build and doesn't have much to offer. In fact, it's still a work in progress.
@@ -58,6 +64,8 @@ This build is extremely experimental. **USE AT YOUR OWN RISK!**
 
 #### If you really want it, download it using the tag [continuous-hybrid](https://github.com/ivan-hc/GIMP-appimage/releases/tag/continuous-hybrid)
 - https://github.com/ivan-hc/GIMP-appimage/releases/tag/continuous-hybrid
+
+The build is manually updated if new features are added.
 
 --------------------------
 # Usage
