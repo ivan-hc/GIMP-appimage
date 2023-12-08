@@ -33,7 +33,7 @@ If you have doubts about which one to use, I recommend you download this one.
 ## Developer Edition, for brave hearts
 GIMP "Dev" is the upcoming version with all latest features and port to the more recent technologies. 
 
-To build this AppImage I've used the package "gimp-git" from ChaoticAUR (see https://builds.garudalinux.org/repos/chaotic-aur/archive/#gimp-git) which is based on "gimp-devel" from the Arch User Repository "AUR" (see https://aur.archlinux.org/packages/gimp-devel).
+To build this AppImage I've used the package "gimp-devel" from the Arch User Repository "AUR" (see https://aur.archlinux.org/packages/gimp-devel).
 
 #### Download it using the tag [continuous-dev](https://github.com/ivan-hc/GIMP-appimage/releases/tag/continuous-dev):
 - https://github.com/ivan-hc/GIMP-appimage/releases/tag/continuous-dev
