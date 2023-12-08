@@ -16,7 +16,7 @@ This repository provides Unofficial AppImages of GIMP built on top of [JuNest](h
 
 -------------------------
 # GIMP flavors: what to choose?
-In this list, you will learn more about the three main builds available in this repository.
+In this list, you will learn more about the four main builds available in this repository.
 
 --------------------------
 ## Stable, the one you may want the most
