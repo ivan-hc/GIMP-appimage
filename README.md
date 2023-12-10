@@ -6,6 +6,7 @@ This repository provides Unofficial AppImages of GIMP built on top of [JuNest](h
   - [2. Developer Edition, for brave hearts](#2-developer-edition-for-brave-hearts)
   - [3. GIT, the daily builds](#3-git-the-daily-builds)
   - [4. Hybrid? What is this?](#4-hybrid-what-is-this)
+  - [5. PPA-based AppImages](#5-ppa-based-appimages)
 - [Usage](#usage)
   - [Add plugins](#add-plugins)
 - [About JuNest-based AppImages](#about-junest-based-appimages)
@@ -16,7 +17,7 @@ This repository provides Unofficial AppImages of GIMP built on top of [JuNest](h
 
 -------------------------
 # GIMP flavors: what to choose?
-In this list, you will learn more about the four main builds available in this repository.
+In this list, you will learn more about the five kinds of builds available in this repository.
 
 --------------------------
 ## 1. Stable, the one you may want the most
@@ -66,6 +67,18 @@ This build is extremely experimental. **USE AT YOUR OWN RISK!**
 - https://github.com/ivan-hc/GIMP-appimage/releases/tag/continuous-hybrid
 
 The build is manually updated if new features are added.
+-------------------------- 
+## 5. PPA-based AppImages
+The GIMP Stable and Developer versions based on the Ubuntu PPAs have a code base maintained by third parties, and are therefore obsolete and no longer maintained by me.
+
+If you're constantly looking for updated builds, go with the first three options I've listed above.
+
+**If for some reason you prefer the Ubuntu base and PPAs**, **I recommend you fork this repository** and redirect the Github Actions workflows to the [dedicated scripts](https://github.com/ivan-hc/GIMP-appimage/tree/main/ppa), as well scripts to build AppImages using a Debian base are avauilable [here](https://github.com/ivan-hc/GIMP-appimage/tree/main/debian).
+
+#### If you want to perform tests on my old builds, download them using the numbered tags (example [2.10.34-2.99.16](https://github.com/ivan-hc/GIMP-appimage/releases/tag/2.10.34-2.99.16), [2.10.32-2.99.14](https://github.com/ivan-hc/GIMP-appimage/releases/tag/2.10.32-2.99.14), [2.99.8-dev](https://github.com/ivan-hc/GIMP-appimage/releases/tag/2.99.8-dev) and [2.10.30](https://github.com/ivan-hc/GIMP-appimage/releases/tag/2.10.30))
+- all of them are using this [AppRun](https://github.com/ivan-hc/GIMP-appimage/blob/main/AppRun), this would help in case you want to build your own GIMP.
+
+Personally, I will not build or distribute any more PPA-based versions of GIMP (click [here](#about-junest-based-appimages) for more details about my choice).
 
 --------------------------
 # Usage
