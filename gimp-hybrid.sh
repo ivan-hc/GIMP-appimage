@@ -3,8 +3,8 @@
 # NAME OF THE APP BY REPLACING "SAMPLE"
 APP=gimp
 BIN="$APP" #CHANGE THIS IF THE NAME OF THE BINARY IS DIFFERENT FROM "$APP" (for example, the binary of "obs-studio" is "obs")
-#DEPENDENCES="python2 gimp-plugin-gmic-git gimp-plugin-fourier-git gimp-plugin-lqr-git gimp-plugin-resynthesizer-git gimp-plugin-bimp gimp-plugin-fblur gimp-lensfun xsane-gimp-git nspr sdl2"
-#BASICSTUFF="base-devel"
+DEPENDENCES=""
+#BASICSTUFF="binutils gzip"
 #COMPILERS="gcc"
 
 # ADD A VERSION, THIS IS NEEDED FOR THE NAME OF THE FINEL APPIMAGE, IF NOT AVAILABLE ON THE REPO, THE VALUE COME FROM AUR, AND VICE VERSA
@@ -57,9 +57,7 @@ sed -i 's/Required DatabaseOptional/Never/g' ./.junest/etc/pacman.conf
 
 # INSTALL THE PROGRAM USING YAY
 ./.local/share/junest/bin/junest -- yay -Syy
-./.local/share/junest/bin/junest -- yay --noconfirm -S gnu-free-fonts $(echo "$BASICSTUFF $COMPILERS $APP")
-#./.local/share/junest/bin/junest -- gpg --keyserver keyserver.ubuntu.com --recv-key C01E1CAD5EA2C4F0B8E3571504C367C218ADD4FF
-#echo y | ./.local/share/junest/bin/junest -- yay --answerclean All --answerdiff All --noconfirm -S $(echo " $DEPENDENCES")
+./.local/share/junest/bin/junest -- yay --noconfirm -S gnu-free-fonts $(echo "$BASICSTUFF $COMPILERS $DEPENDENCES $APP")
 
 # SET THE LOCALE (DON'T TOUCH THIS)
 #sed "s/# /#>/g" ./.junest/etc/locale.gen | sed "s/#//g" | sed "s/>/#/g" >> ./locale.gen # UNCOMMENT TO ENABLE ALL THE LANGUAGES
@@ -92,22 +90,6 @@ cp -r ./.junest/usr/share/pixmaps/*$ICON* ./ 2>/dev/null
 # TEST IF THE DESKTOP FILE AND THE ICON ARE IN THE ROOT OF THE FUTURE APPIMAGE (./*AppDir/*)
 if test -f ./*.desktop; then
 	echo "The .desktop file is available in $APP.AppDir/"
-else 
-	cat <<-HEREDOC >> "./$APP.desktop"
-	[Desktop Entry]
-	Version=1.0
-	Type=Application
-	Name=NAME
-	Comment=
-	Exec=BINARY
-	Icon=tux
-	Categories=Utility;
-	Terminal=true
-	StartupNotify=true
-	HEREDOC
-	sed -i "s#BINARY#$BIN#g" ./$APP.desktop
-	sed -i "s#Name=NAME#Name=$(echo $APP | tr a-z A-Z)#g" ./$APP.desktop
-	wget https://raw.githubusercontent.com/Portable-Linux-Apps/Portable-Linux-Apps.github.io/main/favicon.ico -O ./tux.png
 fi
 
 # ...AND FINALLY CREATE THE APPRUN, IE THE MAIN SCRIPT TO RUN THE APPIMAGE!
@@ -154,10 +136,6 @@ rm -R -f ./$APP.AppDir/.junest/etc/pacman.conf
 rm -R -f ./$APP.AppDir/.junest/usr/include #FILES RELATED TO THE COMPILER
 rm -R -f ./$APP.AppDir/.junest/usr/man #APPIMAGES ARE NOT MENT TO HAVE MAN COMMAND
 rm -R -f ./$APP.AppDir/.junest/var/* #REMOVE ALL PACKAGES DOWNLOADED WITH THE PACKAGE MANAGER
-
-# DOWNLOAD AND EXTRACT PYTHON2
-wget $(wget -q https://api.github.com/repos/VanillaBase1lb/python2-bin-aur/releases -O - | grep python2 | grep browser_download_url | grep -i tar.gz | cut -d '"' -f 4 | head -1)
-tar fx ./*tar.gz
 
 # IN THE NEXT 4 STEPS WE WILL TRY TO LIGHTEN THE FINAL APPIMAGE PACKAGE
 # WE WILL MOVE EXCESS CONTENT TO BACKUP FOLDERS (STEP 1)
@@ -223,7 +201,7 @@ _include_swrast_dri(){
 }
 
 _libkeywords(){
-	LIBSAVED="babl dbus gdk gegl gir gtk icons libalpm libheif libjxl libmng libwebp libwmf libXmu libXpm paint poppler readline xml" # Enter here keywords or file/folder names to save in /usr/lib.
+	LIBSAVED="babl dbus gdk gegl gir gtk icons libalpm libdl libheif libjxl libmng libpthread libutil libwebp libwmf libXmu libXpm paint poppler readline xml" # Enter here keywords or file/folder names to save in /usr/lib.
 	for arg in $LIBSAVED; do
 		for var in $arg; do
  			mv ./$APP.AppDir/.junest/usr/lib/*"$arg"* ./save/
@@ -247,12 +225,6 @@ _liblibs(){
 	readelf -d ./deps/*/*/* | grep .so | sed 's:.* ::' | cut -c 2- | sed 's/\(^.*so\).*$/\1/' | uniq >> ./list
 	readelf -d ./deps/*/*/*/* | grep .so | sed 's:.* ::' | cut -c 2- | sed 's/\(^.*so\).*$/\1/' | uniq >> ./list
 	readelf -d ./deps/*/*/*/*/* | grep .so | sed 's:.* ::' | cut -c 2- | sed 's/\(^.*so\).*$/\1/' | uniq >> ./list
-	# ADDITIONAL CHECK FOR PYTHON2
-	readelf -d ./python2-build/* | grep .so | sed 's:.* ::' | cut -c 2- | sed 's/\(^.*so\).*$/\1/' | uniq >> ./list
-	readelf -d ./python2-build/*/* | grep .so | sed 's:.* ::' | cut -c 2- | sed 's/\(^.*so\).*$/\1/' | uniq >> ./list
-	readelf -d ./python2-build/*/*/* | grep .so | sed 's:.* ::' | cut -c 2- | sed 's/\(^.*so\).*$/\1/' | uniq >> ./list
-	readelf -d ./python2-build/*/*/*/* | grep .so | sed 's:.* ::' | cut -c 2- | sed 's/\(^.*so\).*$/\1/' | uniq >> ./list
-	readelf -d ./python2-build/*/*/*/*/* | grep .so | sed 's:.* ::' | cut -c 2- | sed 's/\(^.*so\).*$/\1/' | uniq >> ./list
 	ARGS=$(tail -n +2 ./list | sort -u | uniq)
 	for arg in $ARGS; do
 		for var in $arg; do
@@ -312,9 +284,6 @@ _saveshare(){
 }
 _saveshare 2> /dev/null
 
-# MERGE PYTHON2
-rsync -av ./python2-build/* ./$APP.AppDir/.junest/usr/
-
 # ADDITIONAL REMOVALS
 mv ./$APP.AppDir/.junest/usr/lib/libLLVM-* ./junest-backups/usr/lib/ #INCLUDED IN THE COMPILATION PHASE, CAN SOMETIMES BE EXCLUDED FOR DAILY USE
 rm -R -f ./$APP.AppDir/.junest/usr/lib/python*/__pycache__/* #IF PYTHON IS INSTALLED, REMOVING THIS DIRECTORY CAN SAVE SEVERAL MEGABYTES
@@ -326,6 +295,12 @@ rm -R -f ./$APP.AppDir/.junest/home
 mkdir -p ./$APP.AppDir/.junest/home
 mkdir -p ./$APP.AppDir/.junest/media
 
+# PATCH GIMP WITH GIMP-PYTHON FROM DEBIAN 10 "BUSTER"
+mkdir gimp-python-patch
+wget https://github.com/ivan-hc/GIMP-appimage/releases/download/gimp-plugins-patches-for-the-hybrid-release/gimp-python-patch.tar.xz
+tar fx ./gimp-python-patch.tar.xz -C ./gimp-python-patch/
+rsync --ignore-existing -raz --progress ./gimp-python-patch/usr/* ./$APP.AppDir/.junest/usr/
+
 # CREATE THE APPIMAGE
 ARCH=x86_64 ./appimagetool -n ./$APP.AppDir
-mv ./*AppImage ./"$(cat ./$APP.AppDir/*.desktop | grep 'Name=' | head -1 | cut -c 6- | sed 's/ /-/g')"_"$VERSION""$VERSIONAUR"-Hybrid-1.0-with-python2-x86_64.AppImage
+mv ./*AppImage ./"$(cat ./$APP.AppDir/*.desktop | grep 'Name=' | head -1 | cut -c 6- | sed 's/ /-/g')"_"$VERSION""$VERSIONAUR"-Hybrid-1.0-with-python2-from-Debian-Buster-x86_64.AppImage
