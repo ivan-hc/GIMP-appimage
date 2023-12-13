@@ -57,16 +57,19 @@ The build is updated every day.
 ## 4. Hybrid? What is this?
 GIMP "Hybrid" is based on the "Stable" version mentioned above, but in addition will contain support for the old Python2 and many third-party plugins. 
 
-As it stands, now it seems to be like a more bloated build and doesn't have much to offer. In fact, it's still a work in progress.
+To check the patches used, see [Plugins patches for the "Hybrid" release](https://github.com/ivan-hc/GIMP-appimage/releases/tag/gimp-plugins-patches-for-the-hybrid-release).
 
-If you are a GIMP fanatic user, you will be able to rely on this build in the future when it is ready, but until then rely on the official Flatpak which already has everything you are looking for. 
+"Hybrid" Is still a work in progress for GIMP fanatics!
+
+If you are a GIMP fanatic too, you can rely on this build, alternatively [rely on the official Flatpak](https://flathub.org/apps/org.gimp.GIMP) which already has everything you are looking for. 
 
 This build is extremely experimental. **USE AT YOUR OWN RISK!**
 
-#### If you really want it, download it using the tag [continuous-hybrid](https://github.com/ivan-hc/GIMP-appimage/releases/tag/continuous-hybrid)
+#### If you really want use "Hybrid", download it using the tag [continuous-hybrid](https://github.com/ivan-hc/GIMP-appimage/releases/tag/continuous-hybrid)
 - https://github.com/ivan-hc/GIMP-appimage/releases/tag/continuous-hybrid
 
-The build is manually updated if new features are added.
+The build is updated every Sunday (one hour later "Stable").
+
 -------------------------- 
 ## 5. PPA-based AppImages
 The GIMP Stable and Developer versions based on the Ubuntu PPAs have a code base maintained by third parties, and are therefore obsolete and no longer maintained by me.
