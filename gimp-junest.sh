@@ -201,7 +201,7 @@ _include_swrast_dri(){
 }
 
 _libkeywords(){
-	LIBSAVED="babl dbus gdk gegl gir gtk icons libalpm libheif libjxl libmng libwebp libwmf libXmu libXpm paint poppler readline xml" # Enter here keywords or file/folder names to save in /usr/lib.
+	LIBSAVED="babl dbus gdk gegl gir gtk icons libalpm libdl libheif libjxl libmng libpthread libutil libwebp libwmf libXmu libXpm paint poppler readline xml" # Enter here keywords or file/folder names to save in /usr/lib.
 	for arg in $LIBSAVED; do
 		for var in $arg; do
  			mv ./$APP.AppDir/.junest/usr/lib/*"$arg"* ./save/
