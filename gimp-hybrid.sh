@@ -43,9 +43,9 @@ git clone https://github.com/fsquillace/junest.git ~/.local/share/junest
 #Include = /etc/pacman.d/chaotic-mirrorlist" >> ./.junest/etc/pacman.conf
 
 # CUSTOM MIRRORLIST, THIS SHOULD SPEEDUP THE INSTALLATION OF THE PACKAGES IN PACMAN (COMMENT EVERYTHING TO USE THE DEFAULT MIRROR)
-COUNTRY=$(curl -i ipinfo.io | grep country | cut -c 15- | cut -c -2)
-rm -R ./.junest/etc/pacman.d/mirrorlist
-wget -q https://archlinux.org/mirrorlist/?country="$(echo $COUNTRY)" -O - | sed 's/#Server/Server/g' >> ./.junest/etc/pacman.d/mirrorlist
+#COUNTRY=$(curl -i ipinfo.io | grep country | cut -c 15- | cut -c -2)
+#rm -R ./.junest/etc/pacman.d/mirrorlist
+#wget -q https://archlinux.org/mirrorlist/?country="$(echo $COUNTRY)" -O - | sed 's/#Server/Server/g' >> ./.junest/etc/pacman.d/mirrorlist
 
 # BYPASS SIGNATURE CHECK LEVEL
 sed -i 's/#SigLevel/SigLevel/g' ./.junest/etc/pacman.conf
