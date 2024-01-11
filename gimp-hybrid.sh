@@ -3,9 +3,9 @@
 # NAME OF THE APP BY REPLACING "SAMPLE"
 APP=gimp
 BIN="$APP" #CHANGE THIS IF THE NAME OF THE BINARY IS DIFFERENT FROM "$APP" (for example, the binary of "obs-studio" is "obs")
-DEPENDENCES=""
+DEPENDENCES="alsa-lib dav1d ffmpeg ghostscript gjs luajit python rav1e svt-av1"
 #BASICSTUFF="binutils gzip"
-#COMPILERS="gcc"
+#COMPILERS="base-devel"
 
 # ADD A VERSION, THIS IS NEEDED FOR THE NAME OF THE FINEL APPIMAGE, IF NOT AVAILABLE ON THE REPO, THE VALUE COME FROM AUR, AND VICE VERSA
 for REPO in { "core" "extra" "community" "multilib" }; do
@@ -32,22 +32,25 @@ wget -q --show-progress https://github.com/ivan-hc/junest/releases/download/cont
 rm -f junest-x86_64.tar.gz
 
 # ENABLE MULTILIB (optional)
-#echo "
-#[multilib]
-#Include = /etc/pacman.d/mirrorlist" >> ./.junest/etc/pacman.conf
+echo "
+[multilib]
+Include = /etc/pacman.d/mirrorlist" >> ./.junest/etc/pacman.conf
 
 # ENABLE CHAOTIC-AUR
-#./.local/share/junest/bin/junest -- sudo pacman-key --recv-key 3056513887B78AEB --keyserver keyserver.ubuntu.com
-#./.local/share/junest/bin/junest -- sudo pacman-key --lsign-key 3056513887B78AEB
-#./.local/share/junest/bin/junest -- sudo pacman --noconfirm -U 'https://cdn-mirror.chaotic.cx/chaotic-aur/chaotic-keyring.pkg.tar.zst' 'https://cdn-mirror.chaotic.cx/chaotic-aur/chaotic-mirrorlist.pkg.tar.zst'
-#echo "
-#[chaotic-aur]
-#Include = /etc/pacman.d/chaotic-mirrorlist" >> ./.junest/etc/pacman.conf
+###./.local/share/junest/bin/junest -- sudo pacman-key --recv-key 3056513887B78AEB --keyserver keyserver.ubuntu.com
+###./.local/share/junest/bin/junest -- sudo pacman-key --lsign-key 3056513887B78AEB
+###./.local/share/junest/bin/junest -- sudo pacman --noconfirm -U 'https://cdn-mirror.chaotic.cx/chaotic-aur/chaotic-keyring.pkg.tar.zst' 'https://cdn-mirror.chaotic.cx/chaotic-aur/chaotic-mirrorlist.pkg.tar.zst'
+###echo "
+###[chaotic-aur]
+###Include = /etc/pacman.d/chaotic-mirrorlist" >> ./.junest/etc/pacman.conf
 
 # CUSTOM MIRRORLIST, THIS SHOULD SPEEDUP THE INSTALLATION OF THE PACKAGES IN PACMAN (COMMENT EVERYTHING TO USE THE DEFAULT MIRROR)
-#COUNTRY=$(curl -i ipinfo.io | grep country | cut -c 15- | cut -c -2)
-#rm -R ./.junest/etc/pacman.d/mirrorlist
-#wget -q https://archlinux.org/mirrorlist/?country="$(echo $COUNTRY)" -O - | sed 's/#Server/Server/g' >> ./.junest/etc/pacman.d/mirrorlist
+_custom_mirrorlist(){
+	COUNTRY=$(curl -i ipinfo.io | grep country | cut -c 15- | cut -c -2)
+	rm -R ./.junest/etc/pacman.d/mirrorlist
+	wget -q https://archlinux.org/mirrorlist/?country="$(echo $COUNTRY)" -O - | sed 's/#Server/Server/g' >> ./.junest/etc/pacman.d/mirrorlist
+}
+#_custom_mirrorlist
 
 # BYPASS SIGNATURE CHECK LEVEL
 sed -i 's/#SigLevel/SigLevel/g' ./.junest/etc/pacman.conf
@@ -59,6 +62,7 @@ sed -i 's/Required DatabaseOptional/Never/g' ./.junest/etc/pacman.conf
 
 # INSTALL THE PROGRAM USING YAY
 ./.local/share/junest/bin/junest -- yay -Syy
+#./.local/share/junest/bin/junest -- gpg --keyserver keyserver.ubuntu.com --recv-key C01E1CAD5EA2C4F0B8E3571504C367C218ADD4FF # UNCOMMENT IF YOU USE THE AUR
 ./.local/share/junest/bin/junest -- yay --noconfirm -S gnu-free-fonts $(echo "$BASICSTUFF $COMPILERS $DEPENDENCES $APP")
 
 # SET THE LOCALE (DON'T TOUCH THIS)
@@ -88,11 +92,6 @@ cp -r ./.junest/usr/share/icons/hicolor/256x256/apps/*$ICON* ./ 2>/dev/null
 cp -r ./.junest/usr/share/icons/hicolor/512x512/apps/*$ICON* ./ 2>/dev/null
 cp -r ./.junest/usr/share/icons/hicolor/scalable/apps/*$ICON* ./ 2>/dev/null
 cp -r ./.junest/usr/share/pixmaps/*$ICON* ./ 2>/dev/null
-
-# TEST IF THE DESKTOP FILE AND THE ICON ARE IN THE ROOT OF THE FUTURE APPIMAGE (./*AppDir/*)
-if test -f ./*.desktop; then
-	echo "The .desktop file is available in $APP.AppDir/"
-fi
 
 # ...AND FINALLY CREATE THE APPRUN, IE THE MAIN SCRIPT TO RUN THE APPIMAGE!
 # EDIT THE FOLLOWING LINES IF YOU THINK SOME ENVIRONMENT VARIABLES ARE MISSING
@@ -125,10 +124,45 @@ mkdir base
 tar fx $APP.AppDir/.junest/var/cache/pacman/pkg/$APP*.zst -C ./base/
 
 mkdir deps
-for arg in $DEPENDENCES; do
+
+ARGS=$(echo "$DEPENDENCES" | tr " " "\n")
+for arg in $ARGS; do
 	for var in $arg; do
  		tar fx $APP.AppDir/.junest/var/cache/pacman/pkg/$arg*.zst -C ./deps/
+		cat ./deps/.PKGINFO | grep "depend = " | grep -v "makedepend = " | cut -c 10- | grep -v "=\|>\|<" > depdeps
 	done
+done
+
+DEPS=$(cat ./base/.PKGINFO | grep "depend = " | grep -v "makedepend = " | cut -c 10- | grep -v "=\|>\|<")
+for arg in $DEPS; do
+	for var in "$arg"; do
+ 		tar fx $APP.AppDir/.junest/var/cache/pacman/pkg/"$arg"*.zst -C ./deps/
+ 		cat ./deps/.PKGINFO | grep "depend = " | grep -v "makedepend = " | cut -c 10- | grep -v "=\|>\|<" > depdeps
+	done
+done
+
+DEPS2=$(cat ./depdeps | uniq)
+for arg in $DEPS2; do
+	for var in "$arg"; do
+ 		tar fx $APP.AppDir/.junest/var/cache/pacman/pkg/"$arg"*.zst -C ./deps/
+ 		cat ./deps/.PKGINFO | grep "depend = " | grep -v "makedepend = " | cut -c 10- | grep -v "=\|>\|<" > depdeps2
+ 	done
+done
+
+DEPS3=$(cat ./depdeps2 | uniq)
+for arg in $DEPS3; do
+	for var in "$arg"; do
+ 		tar fx $APP.AppDir/.junest/var/cache/pacman/pkg/"$arg"*.zst -C ./deps/
+ 		cat ./deps/.PKGINFO | grep "depend = " | grep -v "makedepend = " | cut -c 10- | grep -v "=\|>\|<" > depdeps3
+ 	done
+done
+
+DEPS4=$(cat ./depdeps3 | uniq)
+for arg in $DEPS4; do
+	for var in "$arg"; do
+ 		tar fx $APP.AppDir/.junest/var/cache/pacman/pkg/"$arg"*.zst -C ./deps/
+ 		cat ./deps/.PKGINFO | grep "depend = " | grep -v "makedepend = " | cut -c 10- | grep -v "=\|>\|<" > depdeps4
+ 	done
 done
 
 # REMOVE SOME BLOATWARES
@@ -144,15 +178,23 @@ rm -R -f ./$APP.AppDir/.junest/var/* #REMOVE ALL PACKAGES DOWNLOADED WITH THE PA
 # WE WILL MOVE EXCESS CONTENT TO BACKUP FOLDERS (STEP 1)
 # THE AFFECTED DIRECTORIES WILL BE /usr/bin (STEP 2), /usr/lib (STEP 3) AND /usr/share (STEP 4)
 
+BINSAVED="python gjs luajit" # Enter here keywords to find and save in /usr/bin
+SHARESAVED="babl dbus gegl gir gjs gtk icons libalpm luajit paint poppler readline thumbnailers xml" # Enter here keywords or file/folder names to save in both /usr/share and /usr/lib
+LIBSAVED="babl dbus gdk gegl gir gjs gtk icons libalpm libasound libavcodec libdav libdl libgs libheif libjxl libmng libpthread librav libSvtAv libutil libwebp libwmf libXmu libXpm luajit paint poppler readline xml" # Enter here keywords or file/folder names to save in /usr/lib
+
 # STEP 1, CREATE A BACKUP FOLDER WHERE TO SAVE THE FILES TO BE DISCARDED (USEFUL FOR TESTING PURPOSES)
 mkdir -p ./junest-backups/usr/bin
 mkdir -p ./junest-backups/usr/lib/dri
 mkdir -p ./junest-backups/usr/share
 
+# DOWNLOAD AND EXTRACT PYTHON2 FROM DEBIAN BUSTER
+mkdir gimp-python-patch
+wget https://github.com/ivan-hc/GIMP-appimage/releases/download/gimp-plugins-patches-for-the-hybrid-release/gimp-python-patch.tar.xz
+tar fx ./gimp-python-patch.tar.xz -C ./gimp-python-patch/
+
 # STEP 2, FUNCTION TO SAVE THE BINARIES IN /usr/bin THAT ARE NEEDED TO MADE JUNEST WORK, PLUS THE MAIN BINARY/BINARIES OF THE APP
 # IF YOU NEED TO SAVE MORE BINARIES, LIST THEM IN THE "BINSAVED" VARIABLE. COMMENT THE LINE "_savebins" IF YOU ARE NOT SURE.
 _savebins(){
-	BINSAVED="SAVEBINSPLEASE"
 	mkdir save
 	mv ./$APP.AppDir/.junest/usr/bin/*$BIN* ./save/
 	mv ./$APP.AppDir/.junest/usr/bin/bash ./save/
@@ -182,7 +224,6 @@ _binlibs(){
 	mv ./$APP.AppDir/.junest/usr/lib/*$BIN* ./save/
 	mv ./$APP.AppDir/.junest/usr/lib/libdw* ./save/
 	mv ./$APP.AppDir/.junest/usr/lib/libelf* ./save/
-	SHARESAVED="babl dbus gegl gir gtk icons libalpm paint poppler readline thumbnailers xml" # Enter here keywords or file/folder names to save in /usr/lib. By default, the names of the folders that you will save in /usr/share are selected also here.
 	for arg in $SHARESAVED; do
 		for var in $arg; do
  			mv ./$APP.AppDir/.junest/usr/lib/*"$arg"* ./save/
@@ -205,7 +246,6 @@ _include_swrast_dri(){
 }
 
 _libkeywords(){
-	LIBSAVED="babl dbus gdk gegl gir gtk icons libalpm libdl libheif libjxl libmng libpthread libutil libwebp libwmf libXmu libXpm paint poppler readline xml" # Enter here keywords or file/folder names to save in /usr/lib.
 	for arg in $LIBSAVED; do
 		for var in $arg; do
  			mv ./$APP.AppDir/.junest/usr/lib/*"$arg"* ./save/
@@ -229,6 +269,11 @@ _liblibs(){
 	readelf -d ./deps/*/*/* | grep .so | sed 's:.* ::' | cut -c 2- | sed 's/\(^.*so\).*$/\1/' | uniq >> ./list
 	readelf -d ./deps/*/*/*/* | grep .so | sed 's:.* ::' | cut -c 2- | sed 's/\(^.*so\).*$/\1/' | uniq >> ./list
 	readelf -d ./deps/*/*/*/*/* | grep .so | sed 's:.* ::' | cut -c 2- | sed 's/\(^.*so\).*$/\1/' | uniq >> ./list
+	readelf -d ./gimp-python-patch/usr/* | grep .so | sed 's:.* ::' | cut -c 2- | sed 's/\(^.*so\).*$/\1/' | uniq >> ./list
+	readelf -d ./gimp-python-patch/usr/*/* | grep .so | sed 's:.* ::' | cut -c 2- | sed 's/\(^.*so\).*$/\1/' | uniq >> ./list
+	readelf -d ./gimp-python-patch/usr/*/*/* | grep .so | sed 's:.* ::' | cut -c 2- | sed 's/\(^.*so\).*$/\1/' | uniq >> ./list
+	readelf -d ./gimp-python-patch/usr/*/*/*/* | grep .so | sed 's:.* ::' | cut -c 2- | sed 's/\(^.*so\).*$/\1/' | uniq >> ./list
+	readelf -d ./gimp-python-patch/usr/*/*/*/*/* | grep .so | sed 's:.* ::' | cut -c 2- | sed 's/\(^.*so\).*$/\1/' | uniq >> ./list
 	ARGS=$(tail -n +2 ./list | sort -u | uniq)
 	for arg in $ARGS; do
 		for var in $arg; do
@@ -266,7 +311,6 @@ rmdir save
 # STEP 4, SAVE ONLY SOME DIRECTORIES CONTAINED IN /usr/share
 # IF YOU NEED TO SAVE MORE FOLDERS, LIST THEM IN THE "SHARESAVED" VARIABLE. COMMENT THE LINE "_saveshare" IF YOU ARE NOT SURE.
 _saveshare(){
-	SHARESAVED="babl dbus gegl gir gtk icons libalpm paint poppler readline thumbnailers xml"
 	mkdir save
 	mv ./$APP.AppDir/.junest/usr/share/*$APP* ./save/
  	mv ./$APP.AppDir/.junest/usr/share/*$BIN* ./save/
@@ -288,6 +332,14 @@ _saveshare(){
 }
 _saveshare 2> /dev/null
 
+# RSYNC DEPENDENCES
+#rsync -av ./deps/usr/bin/* ./$APP.AppDir/.junest/usr/bin/
+#rsync -av ./deps/usr/lib/* ./$APP.AppDir/.junest/usr/lib/
+#rsync -av ./deps/usr/share/* ./$APP.AppDir/.junest/usr/share/
+
+# PATCH GIMP WITH GIMP-PYTHON FROM DEBIAN 10 "BUSTER"
+rsync --ignore-existing -raz --progress ./gimp-python-patch/usr/* ./$APP.AppDir/.junest/usr/
+
 # ADDITIONAL REMOVALS
 mv ./$APP.AppDir/.junest/usr/lib/libLLVM-* ./junest-backups/usr/lib/ #INCLUDED IN THE COMPILATION PHASE, CAN SOMETIMES BE EXCLUDED FOR DAILY USE
 rm -R -f ./$APP.AppDir/.junest/usr/lib/python*/__pycache__/* #IF PYTHON IS INSTALLED, REMOVING THIS DIRECTORY CAN SAVE SEVERAL MEGABYTES
@@ -303,12 +355,6 @@ mkdir -p ./$APP.AppDir/.junest/usr/share/fonts
 mkdir -p ./$APP.AppDir/.junest/usr/share/themes
 mkdir -p ./$APP.AppDir/.junest/run/user
 
-# PATCH GIMP WITH GIMP-PYTHON FROM DEBIAN 10 "BUSTER"
-mkdir gimp-python-patch
-wget https://github.com/ivan-hc/GIMP-appimage/releases/download/gimp-plugins-patches-for-the-hybrid-release/gimp-python-patch.tar.xz
-tar fx ./gimp-python-patch.tar.xz -C ./gimp-python-patch/
-rsync --ignore-existing -raz --progress ./gimp-python-patch/usr/* ./$APP.AppDir/.junest/usr/
-
 # CREATE THE APPIMAGE
 ARCH=x86_64 ./appimagetool -n ./$APP.AppDir
-mv ./*AppImage ./"$(cat ./$APP.AppDir/*.desktop | grep 'Name=' | head -1 | cut -c 6- | sed 's/ /-/g')"_"$VERSION""$VERSIONAUR"-Hybrid-1.0-with-python2-from-Debian-Buster-archimage3-x86_64.AppImage
+mv ./*AppImage ./"$(cat ./$APP.AppDir/*.desktop | grep 'Name=' | head -1 | cut -c 6- | sed 's/ /-/g')"_"$VERSION""$VERSIONAUR"-Hybrid-1.0-with-python2-from-Debian-Buster-archimage3-1-x86_64.AppImage
