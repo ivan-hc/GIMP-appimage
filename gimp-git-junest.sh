@@ -51,6 +51,23 @@ _custom_mirrorlist(){
 }
 #_custom_mirrorlist
 
+_mirrorlist_custom(){
+	rm -R ./.junest/etc/pacman.d/mirrorlist
+	cat <<-'HEREDOC' >> "./.junest/etc/pacman.d/mirrorlist"
+	## Worldwide
+	Server = https://geo.mirror.pkgbuild.com/$repo/os/$arch
+	Server = http://mirror.rackspace.com/archlinux/$repo/os/$arch
+	Server = https://mirror.rackspace.com/archlinux/$repo/os/$arch
+	
+	## Italy
+	Server = https://archmirror.it/repos/$repo/os/$arch
+	Server = http://archlinux.mirror.garr.it/archlinux/$repo/os/$arch
+	Server = http://archlinux.mirror.server24.net/$repo/os/$arch
+	Server = https://archlinux.mirror.server24.net/$repo/os/$arch
+	HEREDOC
+}
+_mirrorlist_custom
+
 # BYPASS SIGNATURE CHECK LEVEL
 sed -i 's/#SigLevel/SigLevel/g' ./.junest/etc/pacman.conf
 sed -i 's/Required DatabaseOptional/Never/g' ./.junest/etc/pacman.conf
