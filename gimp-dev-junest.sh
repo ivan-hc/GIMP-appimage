@@ -3,7 +3,8 @@
 # NAME OF THE APP BY REPLACING "SAMPLE"
 APP=gimp-devel
 BIN="gimp" #CHANGE THIS IF THE NAME OF THE BINARY IS DIFFERENT FROM "$APP" (for example, the binary of "obs-studio" is "obs")
-DEPENDENCES="alsa-lib dav1d ffmpeg ghostscript gjs lua lua-lgi luajit nspr python qoi-headers-git rav1e sdl2 svt-av1 tar"
+lua_lgi=$(wget -q https://aur.archlinux.org/cgit/aur.git/plain/PKGBUILD?h=gimp-devel -O - | grep "lgi" | tail -1 | grep -o -P "(?<=').*(?=: )")
+DEPENDENCES="alsa-lib dav1d ffmpeg ghostscript gjs lua luajit nspr python qoi-headers-git rav1e sdl2 svt-av1 tar $lua_lgi"
 BASICSTUFF="binutils gzip"
 COMPILERS="base-devel"
 
