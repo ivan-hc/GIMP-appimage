@@ -3,7 +3,7 @@
 # NAME OF THE APP BY REPLACING "SAMPLE"
 APP=gimp-devel
 BIN="gimp" #CHANGE THIS IF THE NAME OF THE BINARY IS DIFFERENT FROM "$APP" (for example, the binary of "obs-studio" is "obs")
-DEPENDENCES="alsa-lib dav1d ffmpeg ghostscript gjs luajit nspr python qoi-headers-git rav1e sdl2 svt-av1 tar"
+DEPENDENCES="alsa-lib dav1d ffmpeg ghostscript gjs lua lua-lgi luajit nspr python qoi-headers-git rav1e sdl2 svt-av1 tar"
 BASICSTUFF="binutils gzip"
 COMPILERS="base-devel"
 
@@ -178,7 +178,7 @@ rm -R -f ./$APP.AppDir/.junest/var/* #REMOVE ALL PACKAGES DOWNLOADED WITH THE PA
 # WE WILL MOVE EXCESS CONTENT TO BACKUP FOLDERS (STEP 1)
 # THE AFFECTED DIRECTORIES WILL BE /usr/bin (STEP 2), /usr/lib (STEP 3) AND /usr/share (STEP 4)
 
-BINSAVED="python gjs luajit" # Enter here keywords to find and save in /usr/bin
+BINSAVED="python gjs lua" # Enter here keywords to find and save in /usr/bin
 SHARESAVED="babl dbus gegl gir gjs gtk icons libalpm lua paint poppler readline thumbnailers xml" # Enter here keywords or file/folder names to save in both /usr/share and /usr/lib
 LIBSAVED="babl dbus gdk gegl gir gjs gtk icons libalpm libasound libavcodec libdav libdl libgs libheif libjxl libmng libpthread librav libSvtAv libutil libwebp libwmf libXmu libXpm lua paint poppler python readline xml" # Enter here keywords or file/folder names to save in /usr/lib
 
