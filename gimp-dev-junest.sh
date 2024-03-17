@@ -5,7 +5,7 @@ APP=gimp-devel
 BIN="gimp" #CHANGE THIS IF THE NAME OF THE BINARY IS DIFFERENT FROM "$APP" (for example, the binary of "obs-studio" is "obs")
 lua_lgi=$(wget -q https://aur.archlinux.org/cgit/aur.git/plain/PKGBUILD?h=gimp-devel -O - | grep "lgi" | tail -1 | grep -o -P "(?<=').*(?=: )")
 DEPENDENCES="alsa-lib dav1d ffmpeg ghostscript gjs lua luajit nspr python qoi-headers-git rav1e sdl2 svt-av1 tar $lua_lgi"
-BASICSTUFF="binutils gzip"
+BASICSTUFF="binutils debugedit gzip"
 COMPILERS="base-devel"
 
 # CREATE THE APPDIR (DON'T TOUCH THIS)...
@@ -58,7 +58,8 @@ sed -i 's/Required DatabaseOptional/Never/g' ./.junest/etc/pacman.conf
 # INSTALL THE PROGRAM USING YAY
 ./.local/share/junest/bin/junest -- yay -Syy
 ./.local/share/junest/bin/junest -- gpg --keyserver keyserver.ubuntu.com --recv-key C01E1CAD5EA2C4F0B8E3571504C367C218ADD4FF # UNCOMMENT IF YOU USE THE AUR
-echo y | ./.local/share/junest/bin/junest -- yay --answerclean All --answerdiff All --noconfirm -S gnu-free-fonts $(echo "$BASICSTUFF $COMPILERS $DEPENDENCES $APP")
+./.local/share/junest/bin/junest -- yay --noconfirm -S gnu-free-fonts $(echo "$BASICSTUFF $COMPILERS")
+echo y | ./.local/share/junest/bin/junest -- yay --answerclean All --answerdiff All --noconfirm -S gnu-free-fonts $(echo "$DEPENDENCES $APP")
 
 # SET THE LOCALE (DON'T TOUCH THIS)
 #sed "s/# /#>/g" ./.junest/etc/locale.gen | sed "s/#//g" | sed "s/>/#/g" >> ./locale.gen # UNCOMMENT TO ENABLE ALL THE LANGUAGES
