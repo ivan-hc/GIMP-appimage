@@ -72,7 +72,7 @@ fi
 # INSTALL THE PROGRAM USING YAY
 ./.local/share/junest/bin/junest -- yay -Syy
 ./.local/share/junest/bin/junest -- gpg --keyserver keyserver.ubuntu.com --recv-key C01E1CAD5EA2C4F0B8E3571504C367C218ADD4FF # UNCOMMENT IF YOU USE THE AUR
-./.local/share/junest/bin/junest -- yay --noconfirm -S gnu-free-fonts $(echo "$BASICSTUFF $COMPILERS")
+./.local/share/junest/bin/junest -- yay --noconfirm -S gnu-free-fonts $(echo "$BASICSTUFF $COMPILERS") python-packaging python-build
 echo y | ./.local/share/junest/bin/junest -- yay --answerclean All --answerdiff All --noconfirm -S gnu-free-fonts $(echo "$DEPENDENCES")
 echo y | ./.local/share/junest/bin/junest -- yay --answerclean All --answerdiff All --noconfirm -S aur/$(echo "$APP")
 
@@ -158,7 +158,7 @@ cd ..
 mkdir -p base
 rm -R -f ./base/*
 
-tar fx $(find ./$APP.AppDir -name gimp-*zst | grep "yay" | head -1) -C ./base/
+tar fx $(find ./$APP.AppDir -name $APP-[0-9]*zst | head -1) -C ./base/
 VERSION=$(cat ./base/.PKGINFO | grep pkgver | cut -c 10- | sed 's@.*:@@')
 
 mkdir -p deps
