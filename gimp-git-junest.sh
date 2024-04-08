@@ -4,7 +4,7 @@
 APP=gimp-git
 BIN="gimp" #CHANGE THIS IF THE NAME OF THE BINARY IS DIFFERENT FROM "$APP" (for example, the binary of "obs-studio" is "obs")
 DEPENDENCES="alsa-lib dav1d ffmpeg ghostscript gjs luajit nspr python qoi-headers-git rav1e sdl2 svt-av1 tar"
-BASICSTUFF="binutils debugedit gzip"
+BASICSTUFF="binutils debugedit gzip gtk3"
 COMPILERS="base-devel"
 
 # CREATE THE APPDIR (DON'T TOUCH THIS)...
@@ -207,7 +207,7 @@ rm -R -f ./$APP.AppDir/.junest/var/* #REMOVE ALL PACKAGES DOWNLOADED WITH THE PA
 # SAVE FILES USING KEYWORDS
 BINSAVED="python gjs luajit" # Enter here keywords to find and save in /usr/bin
 SHARESAVED="babl dbus gegl gir gjs gtk icons libalpm lua paint poppler readline thumbnailers xml" # Enter here keywords or file/folder names to save in both /usr/share and /usr/lib
-LIBSAVED="babl dbus gdk gegl gir gjs gtk icons libalpm libasound libavcodec libdav libdl libgs libheif libjxl libmng libpthread librav libSvtAv libutil libwebp libwmf libXmu libXpm lua paint poppler python readline xml" # Enter here keywords or file/folder names to save in /usr/lib
+LIBSAVED="babl dbus gdk gegl gir gjs gtk icons libalpm libasound libavcodec libdav libdl libgs libheif libjxl libmng libpthread librav libSvtAv libutil libwebp libwmf libXmu libXpm lua paint poppler python readline xml gio-launch-desktop librt.so libgtk-" # Enter here keywords or file/folder names to save in /usr/lib
 
 # STEP 2, FUNCTION TO SAVE THE BINARIES IN /usr/bin THAT ARE NEEDED TO MADE JUNEST WORK, PLUS THE MAIN BINARY/BINARIES OF THE APP
 # IF YOU NEED TO SAVE MORE BINARIES, LIST THEM IN THE "BINSAVED" VARIABLE. COMMENT THE LINE "_savebins" IF YOU ARE NOT SURE.
