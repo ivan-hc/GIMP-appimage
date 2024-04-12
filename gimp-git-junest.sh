@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 
 # NAME OF THE APP BY REPLACING "SAMPLE"
-APP=gimp-git
+APP=gimp-develop-git
 BIN="gimp" #CHANGE THIS IF THE NAME OF THE BINARY IS DIFFERENT FROM "$APP" (for example, the binary of "obs-studio" is "obs")
 DEPENDENCES="alsa-lib dav1d ffmpeg ghostscript gjs luajit nspr python qoi-headers-git rav1e sdl2 svt-av1 tar"
 BASICSTUFF="binutils debugedit gzip gtk3"
@@ -43,7 +43,7 @@ if ! test -d "$HOME/.local/share/junest"; then
 		./.local/share/junest/bin/junest -- sudo pacman --noconfirm -U 'https://cdn-mirror.chaotic.cx/chaotic-aur/chaotic-keyring.pkg.tar.zst' 'https://cdn-mirror.chaotic.cx/chaotic-aur/chaotic-mirrorlist.pkg.tar.zst'
 		echo -e "\n[chaotic-aur]\nInclude = /etc/pacman.d/chaotic-mirrorlist" >> ./.junest/etc/pacman.conf
 	}
-	#_enable_chaoticaur
+	_enable_chaoticaur
 
 	# CUSTOM MIRRORLIST, THIS SHOULD SPEEDUP THE INSTALLATION OF THE PACKAGES IN PACMAN (COMMENT EVERYTHING TO USE THE DEFAULT MIRROR)
 	function _custom_mirrorlist(){
@@ -74,7 +74,7 @@ fi
 ./.local/share/junest/bin/junest -- gpg --keyserver keyserver.ubuntu.com --recv-key C01E1CAD5EA2C4F0B8E3571504C367C218ADD4FF # UNCOMMENT IF YOU USE THE AUR
 ./.local/share/junest/bin/junest -- yay --noconfirm -S gnu-free-fonts $(echo "$BASICSTUFF $COMPILERS") python-packaging python-build
 echo y | ./.local/share/junest/bin/junest -- yay --answerclean All --answerdiff All --noconfirm -S gnu-free-fonts $(echo "$DEPENDENCES")
-echo y | ./.local/share/junest/bin/junest -- yay --answerclean All --answerdiff All --noconfirm -S $(echo "$APP")
+echo y | ./.local/share/junest/bin/junest -- yay --answerclean All --answerdiff All --noconfirm -S aur/$(echo "$APP")
 
 # DO A BACKUP OF THE CURRENT STATE OF JUNEST
 cd ..
@@ -347,7 +347,7 @@ function _icons_patch_for_gimp-develop-git() {
 		cd - 1> /dev/null
 	done
 }
-#_icons_patch_for_gimp-develop-git
+_icons_patch_for_gimp-develop-git
 
 # ADDITIONAL REMOVALS
 rm -R -f ./$APP.AppDir/.junest/usr/lib/libLLVM-* #INCLUDED IN THE COMPILATION PHASE, CAN SOMETIMES BE EXCLUDED FOR DAILY USE
