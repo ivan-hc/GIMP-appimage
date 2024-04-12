@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 
 # NAME OF THE APP BY REPLACING "SAMPLE"
-APP=gimp-develop-git
+APP=gimp-git
 BIN="gimp" #CHANGE THIS IF THE NAME OF THE BINARY IS DIFFERENT FROM "$APP" (for example, the binary of "obs-studio" is "obs")
 DEPENDENCES="alsa-lib dav1d ffmpeg ghostscript gjs luajit nspr python qoi-headers-git rav1e sdl2 svt-av1 tar"
 BASICSTUFF="binutils debugedit gzip gtk3"
@@ -338,13 +338,16 @@ rsync -av ./base/* ./$APP.AppDir/.junest/
 rm -R -f ./deps/.*
 #rsync -av ./deps/* ./$APP.AppDir/.junest/
 
-# FIX MISSING ICONS (due to non-conflict's nature of this package)
-for i in ./gimp-develop-git.AppDir/.junest/usr/share/icons/hicolor/*; do
-	cd "$i"/apps/ 2> /dev/null
-	cp ./gimp-*.png ./gimp.png 2> /dev/null
-	cp ./gimp-*.svg ./bimp.svg 2> /dev/null
-	cd - 1> /dev/null
-done
+# FIX MISSING ICONS (in case we switch to "gimp-develop-git" instead, due to its non-conflict's nature)
+function _icons_patch_for_gimp-develop-git() {
+	for i in ./gimp-develop-git.AppDir/.junest/usr/share/icons/hicolor/*; do
+		cd "$i"/apps/ 2> /dev/null
+		cp ./gimp-*.png ./gimp.png 2> /dev/null
+		cp ./gimp-*.svg ./bimp.svg 2> /dev/null
+		cd - 1> /dev/null
+	done
+}
+#_icons_patch_for_gimp-develop-git
 
 # ADDITIONAL REMOVALS
 rm -R -f ./$APP.AppDir/.junest/usr/lib/libLLVM-* #INCLUDED IN THE COMPILATION PHASE, CAN SOMETIMES BE EXCLUDED FOR DAILY USE
