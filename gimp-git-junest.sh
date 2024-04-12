@@ -43,7 +43,7 @@ if ! test -d "$HOME/.local/share/junest"; then
 		./.local/share/junest/bin/junest -- sudo pacman --noconfirm -U 'https://cdn-mirror.chaotic.cx/chaotic-aur/chaotic-keyring.pkg.tar.zst' 'https://cdn-mirror.chaotic.cx/chaotic-aur/chaotic-mirrorlist.pkg.tar.zst'
 		echo -e "\n[chaotic-aur]\nInclude = /etc/pacman.d/chaotic-mirrorlist" >> ./.junest/etc/pacman.conf
 	}
-	_enable_chaoticaur
+	#_enable_chaoticaur
 
 	# CUSTOM MIRRORLIST, THIS SHOULD SPEEDUP THE INSTALLATION OF THE PACKAGES IN PACMAN (COMMENT EVERYTHING TO USE THE DEFAULT MIRROR)
 	function _custom_mirrorlist(){
@@ -74,7 +74,7 @@ fi
 ./.local/share/junest/bin/junest -- gpg --keyserver keyserver.ubuntu.com --recv-key C01E1CAD5EA2C4F0B8E3571504C367C218ADD4FF # UNCOMMENT IF YOU USE THE AUR
 ./.local/share/junest/bin/junest -- yay --noconfirm -S gnu-free-fonts $(echo "$BASICSTUFF $COMPILERS") python-packaging python-build
 echo y | ./.local/share/junest/bin/junest -- yay --answerclean All --answerdiff All --noconfirm -S gnu-free-fonts $(echo "$DEPENDENCES")
-echo y | ./.local/share/junest/bin/junest -- yay --answerclean All --answerdiff All --noconfirm -S aur/$(echo "$APP")
+echo y | ./.local/share/junest/bin/junest -- yay --answerclean All --answerdiff All --noconfirm -S $(echo "$APP")
 
 # DO A BACKUP OF THE CURRENT STATE OF JUNEST
 cd ..
