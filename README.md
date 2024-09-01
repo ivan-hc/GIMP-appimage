@@ -46,7 +46,9 @@ The build is updated every three days.
 ---------------------------
 
 ## 3. GIT, the daily builds
-GIMP "GIT" is built from source using the AUR package "gimp-git" (see https://aur.archlinux.org/packages/gimp-git). Every feature, even experimental, comes from source code, which may cause instability.
+GIMP "GIT" is built from the "gimp-git" package on repo.archlinuxcn.org (see https://repo.archlinuxcn.org/x86_64). Formerly it was compiled from source using the AUR package "gimp-git" (at https://aur.archlinux.org/packages/gimp-git), but since the latter is not constantly maintained and susceptible to failures (about 30 minutes of compilation and then failure, for weeks or months) I decided to switch to the package from the aforementioned repositories, on September 2024.
+
+Every feature, even experimental, comes from source code, which may cause instability.
 
 #### Download it using the tag [continuous-git](https://github.com/ivan-hc/GIMP-appimage/releases/tag/continuous-git):
 - https://github.com/ivan-hc/GIMP-appimage/releases/tag/continuous-git
