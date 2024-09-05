@@ -49,5 +49,5 @@ jobs:
             prerelease: false
             draft: false
             files: |
-              GNU_Image_Manipulation_Program-x86_64.AppImage
+              *.AppImage
             repo_token: ${{ secrets.GITHUB_TOKEN }}
