@@ -352,6 +352,8 @@ rm -R -f ./deps/.*
 # ADDITIONAL REMOVALS
 rm -R -f ./$APP.AppDir/.junest/usr/lib/libLLVM-* #INCLUDED IN THE COMPILATION PHASE, CAN SOMETIMES BE EXCLUDED FOR DAILY USE
 rm -R -f ./$APP.AppDir/.junest/usr/lib/python*/__pycache__/* #IF PYTHON IS INSTALLED, REMOVING THIS DIRECTORY CAN SAVE SEVERAL MEGABYTES
+strip --strip-debug ./$APP.AppDir/.junest/usr/lib/*
+strip --strip-unneeded ./$APP.AppDir/.junest/usr/bin/*
 
 # REMOVE THE INBUILT HOME
 rm -R -f ./$APP.AppDir/.junest/home
