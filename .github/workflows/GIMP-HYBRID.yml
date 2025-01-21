@@ -18,12 +18,11 @@ jobs:
       if: always()
       run: |
         sudo apt update
-        sudo apt install libfuse2 desktop-file-utils
-        wget https://raw.githubusercontent.com/ivan-hc/GIMP-appimage/main/gimp-hybrid.sh
+        sudo apt install desktop-file-utils
         chmod a+x ./gimp-hybrid.sh
         ./gimp-hybrid.sh
         mkdir dist
-        mv *AppImage dist/
+        mv *AppImage* dist/
 
     - name: Upload artifact
       uses: actions/upload-artifact@v4.4.0
@@ -49,5 +48,5 @@ jobs:
             prerelease: true
             draft: false
             files: |
-              *.AppImage
+              *.AppImage*
             repo_token: ${{ secrets.GITHUB_TOKEN }}
