@@ -535,9 +535,18 @@ strip --strip-debug ./$APP.AppDir/.junest/usr/lib/*
 strip --strip-unneeded ./$APP.AppDir/.junest/usr/bin/*
 _enable_mountpoints_for_the_inbuilt_bubblewrap
 
-# CREATE THE APPIMAGE
-if test -f ./*.AppImage; then
-	rm -R -f ./*archimage*.AppImage
-fi
-ARCH=x86_64 ./appimagetool --comp zstd --mksquashfs-opt -Xcompression-level --mksquashfs-opt 20 ./$APP.AppDir
-mv ./*AppImage ./"$(cat ./"$APP".AppDir/*.desktop | grep 'Name=' | head -1 | cut -c 6- | sed 's/ /-/g')"_GIT_"$VERSION"-archimage3.4.4-2-x86_64.AppImage
+#############################################################################
+#	CREATE THE APPIMAGE
+#############################################################################
+
+if test -f ./*.AppImage; then rm -Rf ./*archimage*.AppImage; fi
+
+APPNAME=$(cat ./"$APP".AppDir/*.desktop | grep 'Name=' | head -1 | cut -c 6- | sed 's/ /-/g')
+REPO="GIMP-appimage"
+TAG="continuous-git"
+VERSION="$VERSION"
+UPINFO="gh-releases-zsync|$GITHUB_REPOSITORY_OWNER|$REPO|$TAG|*x86_64.AppImage.zsync"
+
+ARCH=x86_64 ./appimagetool --comp zstd --mksquashfs-opt -Xcompression-level --mksquashfs-opt 20 \
+	-u "$UPINFO" \
+	./"$APP".AppDir "$APPNAME"_GIT_"$VERSION"-archimage3.5-x86_64.AppImage

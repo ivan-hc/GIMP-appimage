@@ -366,9 +366,18 @@ mkdir -p ./$APP.AppDir/.junest/usr/share/fonts
 mkdir -p ./$APP.AppDir/.junest/usr/share/themes
 mkdir -p ./$APP.AppDir/.junest/run/user
 
-# CREATE THE APPIMAGE
-if test -f ./*.AppImage; then
-	rm -R -f ./*archimage*.AppImage
-fi
-ARCH=x86_64 ./appimagetool --comp zstd --mksquashfs-opt -Xcompression-level --mksquashfs-opt 20 ./$APP.AppDir
-mv ./*AppImage ./"$(cat ./$APP.AppDir/*.desktop | grep 'Name=' | head -1 | cut -c 6- | sed 's/ /-/g')"_DEV_"$VERSION"-archimage3.4.1-1-x86_64.AppImage
+#############################################################################
+#	CREATE THE APPIMAGE
+#############################################################################
+
+if test -f ./*.AppImage; then rm -Rf ./*archimage*.AppImage; fi
+
+APPNAME=$(cat ./"$APP".AppDir/*.desktop | grep 'Name=' | head -1 | cut -c 6- | sed 's/ /-/g')
+REPO="GIMP-appimage"
+TAG="continuous-dev"
+VERSION="$VERSION"
+UPINFO="gh-releases-zsync|$GITHUB_REPOSITORY_OWNER|$REPO|$TAG|*x86_64.AppImage.zsync"
+
+ARCH=x86_64 ./appimagetool --comp zstd --mksquashfs-opt -Xcompression-level --mksquashfs-opt 20 \
+	-u "$UPINFO" \
+	./"$APP".AppDir "$APPNAME"_DEV_"$VERSION"-archimage3.5-x86_64.AppImage
