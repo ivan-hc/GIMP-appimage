@@ -561,6 +561,8 @@ find ./"$APP".AppDir/.junest/usr/bin -type f ! -regex '.*\.so.*' -exec strip --s
 find ./"$APP".AppDir/.junest/usr -type d -empty -delete
 gimpdirs=$(find archlinux/.junest/usr/share/gimp -type d | sed 's/^archlinux\///g')
 for d in $gimpdirs; do mkdir -p "$APP".AppDir/"$d"; done
+gimplibs=$(find archlinux/.junest/usr/lib/gimp -type d | sed 's/^archlinux\///g')
+for d in $gimplibs; do mkdir -p "$APP".AppDir/"$d"; done
 _enable_mountpoints_for_the_inbuilt_bubblewrap
 
 #############################################################################
