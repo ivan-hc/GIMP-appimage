@@ -11,7 +11,7 @@ BASICSTUFF="binutils debugedit gzip"
 #############################################################################
 
 BINSAVED="fc- gdb gjs"
-SHARESAVED="xml"
+SHARESAVED="xml icons"
 #lib_audio_keywords="alsa jack pipewire pulse"
 lib_browser_launcher="gio-launch-desktop libasound.so libatk-bridge libatspi libcloudproviders libdb- libdl.so libedit libepoxy libgtk-3.so.0 libjson-glib libnssutil libpthread.so librt.so libtinysparql libwayland-cursor libX11-xcb.so libxapp-gtk3-module.so libXcursor libXdamage libXi.so libxkbfile.so libXrandr p11 pk"
 LIBSAVED="gdk-pixbuf libjson libsoxr.so libuuid.so libsodium.so pixmap libSDL \
@@ -524,7 +524,7 @@ _remove_more_bloatwares() {
 	for r in $lib_remove; do
 		rm -Rf ./"$APP".AppDir/.junest/usr/lib/"$r"*
 	done
-	share_remove="gcc"
+	share_remove="gcc icons/Adwaita/cursors/ icons/AdwaitaLegacy"
 	for r in $share_remove; do
 		rm -Rf ./"$APP".AppDir/.junest/usr/share/"$r"*
 	done
