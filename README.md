@@ -1,6 +1,6 @@
 This repository provides Unofficial AppImages of GIMP built on top of [JuNest](https://github.com/fsquillace/junest) and the scripts to built them.
 
-## If you are looking for the Official AppImage, see https://www.gimp.org/downloads
+### If you are looking for the Official AppImage, see https://www.gimp.org/downloads
 
 Consider this repository as a "fallback".
 
