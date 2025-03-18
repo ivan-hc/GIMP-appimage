@@ -1,5 +1,7 @@
 This repository provides Unofficial AppImages of GIMP built on top of [JuNest](https://github.com/fsquillace/junest) and the scripts to built them.
 
+## If you are looking for the Official AppImage, see https://www.gimp.org/downloads
+
 -------------------------
 - [GIMP flavors: what to choose?](#gimp-flavors-what-to-choose)
   - [1. Stable, the one you may want the most](#1-stable-the-one-you-may-want-the-most)
