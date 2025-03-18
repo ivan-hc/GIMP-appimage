@@ -2,7 +2,7 @@ This repository provides Unofficial AppImages of GIMP built on top of [JuNest](h
 
 ### If you are looking for the Official AppImage, see https://www.gimp.org/downloads
 
-Consider this repository as a "fallback".
+That said, consider this repository as a "fallback".
 
 -------------------------
 - [GIMP flavors: what to choose?](#gimp-flavors-what-to-choose)
