@@ -2,7 +2,7 @@
 
 APP=gimp-git
 BIN="gimp" #CHANGE THIS IF THE NAME OF THE BINARY IS DIFFERENT FROM "$APP" (for example, the binary of "obs-studio" is "obs")
-DEPENDENCES="dbus gdb ghostscript gjs highway libelf libgudev libunwind luajit nspr python python-gobject qoi-headers-git" #SYNTAX: "APP1 APP2 APP3 APP4...", LEAVE BLANK IF NO OTHER DEPENDENCIES ARE NEEDED
+DEPENDENCES="dbus gdb ghostscript gjs highway libelf libgudev libunwind luajit nspr python python-cairo python-gobject qoi-headers-git" #SYNTAX: "APP1 APP2 APP3 APP4...", LEAVE BLANK IF NO OTHER DEPENDENCIES ARE NEEDED
 BASICSTUFF="binutils debugedit gzip"
 #COMPILERS="base-devel"
 
@@ -343,7 +343,7 @@ _extract_package() {
 			tar fx "$pkg_full_path" -C ./deps/ --warning=no-unknown-keyword
 			echo "$pkgname" >> ./packages
 		fi
-		[ -n "$lib_browser_launcher" ] && [[ "$arg" =~ (babl-git|gegl-git|hicolor-icon-theme|xapp|dbus|gdb|ghostscript|gjs|libunwind|luajit|nspr|python|python-gobject|libgudev) ]] && tar fx "$pkg_full_path" -C ./base/ --warning=no-unknown-keyword --exclude='.PKGINFO'
+		[ -n "$lib_browser_launcher" ] && [[ "$arg" =~ (babl-git|gegl-git|hicolor-icon-theme|xapp|dbus|gdb|ghostscript|gjs|libunwind|luajit|nspr|python|python-cairo|python-gobject|libgudev) ]] && tar fx "$pkg_full_path" -C ./base/ --warning=no-unknown-keyword --exclude='.PKGINFO'
 	fi
 }
 
