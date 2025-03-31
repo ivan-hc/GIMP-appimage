@@ -278,8 +278,8 @@ _JUNEST_CMD() {
 EXEC=$(grep -e '^Exec=.*' "${HERE}"/*.desktop | head -n 1 | cut -d "=" -f 2- | sed -e 's|%.||g')
 
 case "$1" in
-	gimptool) _JUNEST_CMD -- "$JUNEST_HOME"/usr/bin/gimptool "$@";;
-	*) _JUNEST_CMD -- "$JUNEST_HOME"/usr/bin/gimp "$@";;
+	gimptool) _JUNEST_CMD -- /usr/bin/gimptool "$@";;
+	*) _JUNEST_CMD -- /usr/bin/gimp "$@";;
 esac
 
 HEREDOC
