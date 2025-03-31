@@ -207,7 +207,6 @@ done
 
 rsync -av archlinux/.junest/usr/bin_wrappers/ "$APP".AppDir/.junest/usr/bin_wrappers/ | echo "◆ Rsync bin_wrappers to the AppDir"
 rsync -av archlinux/.junest/etc/* "$APP".AppDir/.junest/etc/ | echo "◆ Rsync /etc"
-[ -f "$APP".AppDir/.junest/etc/fuse.conf ] && sed -i 's/#user_allow_other/user_allow_other/' "$APP".AppDir/.junest/etc/fuse.conf
 
 #############################################################################
 #	APPRUN
@@ -279,8 +278,8 @@ _JUNEST_CMD() {
 EXEC=$(grep -e '^Exec=.*' "${HERE}"/*.desktop | head -n 1 | cut -d "=" -f 2- | sed -e 's|%.||g')
 
 case "$1" in
-	gimptool) _JUNEST_CMD -- gimptool "$@";;
-	*) _JUNEST_CMD -- gimp "$@";;
+	gimptool) _JUNEST_CMD -- "$JUNEST_HOME"/usr/bin/gimptool "$@";;
+	*) _JUNEST_CMD -- "$JUNEST_HOME"/usr/bin/gimp "$@";;
 esac
 
 HEREDOC
