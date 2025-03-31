@@ -2,7 +2,7 @@
 
 APP=gimp
 BIN="$APP" #CHANGE THIS IF THE NAME OF THE BINARY IS DIFFERENT FROM "$APP" (for example, the binary of "obs-studio" is "obs")
-DEPENDENCES="ffmpeg graphviz python-cairo sdl2" #SYNTAX: "APP1 APP2 APP3 APP4...", LEAVE BLANK IF NO OTHER DEPENDENCIES ARE NEEDED
+DEPENDENCES="adwaita-icon-theme ffmpeg graphviz python-cairo sdl2" #SYNTAX: "APP1 APP2 APP3 APP4...", LEAVE BLANK IF NO OTHER DEPENDENCIES ARE NEEDED
 #BASICSTUFF="binutils debugedit gzip"
 #COMPILERS="base-devel"
 
@@ -336,7 +336,7 @@ _extract_package() {
 			tar fx "$pkg_full_path" -C ./deps/ --warning=no-unknown-keyword
 			echo "$pkgname" >> ./packages
 		fi
-		[ -n "$lib_browser_launcher" ] && [[ "$arg" =~ (babl|gegl|hicolor-icon-theme|python-cairo|xapp) ]] && tar fx "$pkg_full_path" -C ./base/ --warning=no-unknown-keyword --exclude='.PKGINFO'
+		[ -n "$lib_browser_launcher" ] && [[ "$arg" =~ (adwaita-icon-theme|babl|gegl|hicolor-icon-theme|python-cairo|xapp) ]] && tar fx "$pkg_full_path" -C ./base/ --warning=no-unknown-keyword --exclude='.PKGINFO'
 	fi
 }
 
