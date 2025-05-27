@@ -279,7 +279,7 @@ EXEC=$(grep -e '^Exec=.*' "${HERE}"/*.desktop | head -n 1 | cut -d "=" -f 2- | s
 
 case "$1" in
 	gimptool) _JUNEST_CMD -- /usr/bin/gimptool "$@";;
-	*) _JUNEST_CMD -- /usr/bin/gimp "$@";;
+	*) _JUNEST_CMD -- /usr/bin/$EXEC "$@";;
 esac
 
 HEREDOC
