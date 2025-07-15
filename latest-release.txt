@@ -1,5 +1,5 @@
-https://github.com/ivan-hc/GIMP-appimage/releases/download/continuous-git/GNU-Image-Manipulation-Program_GIT_55074.0dbc19d3036-1-archimage4.3-x86_64.AppImage
 https://github.com/ivan-hc/GIMP-appimage/releases/download/continuous-stable/GNU-Image-Manipulation-Program_3.0.4-3-archimage4.3-x86_64.AppImage
+https://github.com/ivan-hc/GIMP-appimage/releases/download/continuous-git/GNU-Image-Manipulation-Program_GIT_55074.0dbc19d3036-1-archimage4.3-x86_64.AppImage
 https://github.com/ivan-hc/GIMP-appimage/releases/download/continuous-dev/GNU-Image-Manipulation-Program_DEV_3.0.0rc3-1-archimage3.5-x86_64.AppImage
 https://github.com/ivan-hc/GIMP-appimage/releases/download/continuous-hybrid/GNU-Image-Manipulation-Program_2.10.38-4-Hybrid-with-python2-from-Debian-Buster-archimage3.4.1-1-x86_64.AppImage
-Sun Jul 13 00:51:07 UTC 2025
+Tue Jul 15 00:46:28 UTC 2025
