@@ -2,7 +2,7 @@
 
 APP=gimp-git
 BIN="gimp" #CHANGE THIS IF THE NAME OF THE BINARY IS DIFFERENT FROM "$APP" (for example, the binary of "obs-studio" is "obs")
-DEPENDENCES="dbus gdb ghostscript gjs highway libelf libgudev libunwind luajit nspr python python-cairo python-gobject qoi-headers-git" #SYNTAX: "APP1 APP2 APP3 APP4...", LEAVE BLANK IF NO OTHER DEPENDENCIES ARE NEEDED
+DEPENDENCES="appstream dbus gdb ghostscript gjs highway libelf libgudev libunwind luajit nspr python python-cairo python-gobject qoi-headers-git" #SYNTAX: "APP1 APP2 APP3 APP4...", LEAVE BLANK IF NO OTHER DEPENDENCIES ARE NEEDED
 BASICSTUFF="binutils debugedit gzip"
 #COMPILERS="base-devel"
 
@@ -15,7 +15,7 @@ SHARESAVED="xml icons"
 #lib_audio_keywords="alsa jack pipewire pulse"
 lib_browser_launcher="gio-launch-desktop libasound.so libatk-bridge libatspi libcloudproviders libdb- libdl.so libedit libepoxy libgtk-3.so.0 libjson-glib libnssutil libpthread.so librt.so libtinysparql libwayland-cursor libX11-xcb.so libxapp-gtk3-module.so libXcursor libXdamage libXi.so libxkbfile.so libXrandr p11 pk"
 LIBSAVED="gdk-pixbuf libjson libsoxr.so libuuid.so libsodium.so pixmap libSDL \
-libpython libavcodec.so libgudev libpoppler.so libhogweed.so libgjs.so girepository libgpgme.so libhwy.so libassuan.so libdebuginfod $lib_audio_keywords $lib_browser_launcher"
+libappstream libpython libavcodec.so libgudev libpoppler.so libhogweed.so libgjs.so girepository libgpgme.so libhwy.so libassuan.so libdebuginfod $lib_audio_keywords $lib_browser_launcher"
 
 [ -n "$lib_browser_launcher" ] && DEPENDENCES="$DEPENDENCES xapp hicolor-icon-theme"
 
