@@ -64,7 +64,7 @@ jobs:
         - name: release
           uses: marvinpinto/action-automatic-releases@latest
           with:
-            title: Continuous Stable release
+            title: Continuous Stable
             automatic_release_tag: continuous-stable
             prerelease: false
             draft: false
