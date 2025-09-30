@@ -7,10 +7,8 @@ That said, consider this repository as a "fallback".
 -------------------------
 - [GIMP flavors: what to choose?](#gimp-flavors-what-to-choose)
   - [1. Stable, the one you may want the most](#1-stable-the-one-you-may-want-the-most)
-  - [2. Developer Edition, for brave hearts](#2-developer-edition-for-brave-hearts)
-  - [3. GIT, the daily builds](#3-git-the-daily-builds)
-  - [4. Hybrid? What is this?](#4-hybrid-what-is-this)
-  - [5. PPA-based AppImages](#5-ppa-based-appimages)
+  - [2. GIT, the daily builds](#2-git-the-daily-builds)
+  - [3. Hybrid? What is this?](#3-hybrid-what-is-this)
 - [Usage](#usage)
   - [Add plugins](#add-plugins)
 - [About JuNest-based AppImages](#about-junest-based-appimages)
@@ -21,7 +19,7 @@ That said, consider this repository as a "fallback".
 
 -------------------------
 # GIMP flavors: what to choose?
-In this list, you will learn more about the five kinds of builds available in this repository.
+In this list, you will learn more about the three kinds of builds available in this repository.
 
 --------------------------
 ## 1. Stable, the one you may want the most
@@ -37,19 +35,7 @@ The build is updated every Sunday.
 
 ---------------------------
 
-## 2. Developer Edition, for brave hearts
-GIMP "Dev" is the upcoming version with all latest features and port to the more recent technologies. 
-
-To build this AppImage I've used the package "gimp-devel" from the Arch User Repository "AUR" (see https://aur.archlinux.org/packages/gimp-devel).
-
-#### Download it using the tag [continuous-dev](https://github.com/ivan-hc/GIMP-appimage/releases/tag/continuous-dev):
-- https://github.com/ivan-hc/GIMP-appimage/releases/tag/continuous-dev
-
-The build is updated every three days.
-
----------------------------
-
-## 3. GIT, the daily builds
+## 2. GIT, the daily builds
 GIMP "GIT" is built from the "gimp-git" package on repo.archlinuxcn.org (see https://repo.archlinuxcn.org/x86_64). Formerly it was compiled from source using the AUR package "gimp-git" (at https://aur.archlinux.org/packages/gimp-git), but since the latter is not constantly maintained and susceptible to failures (about 30 minutes of compilation and then failure, for weeks or months) I decided to switch to the package from the aforementioned repositories, on September 2024.
 
 Every feature, even experimental, comes from source code, which may cause instability.
@@ -60,34 +46,19 @@ Every feature, even experimental, comes from source code, which may cause instab
 The build is updated every day.
 
 -------------------------- 
-## 4. Hybrid? What is this?
-GIMP "Hybrid" is based on the "Stable" version mentioned above, but in addition will contain support for the old Python2 and many third-party plugins. 
+## 3. Hybrid? What is this?
+GIMP "Hybrid" is a snapshot of GIMP 2.10.38. In addition will contain support for the old Python2 and many third-party plugins. 
 
 To check the patches used, see [Plugins patches for the "Hybrid" release](https://github.com/ivan-hc/GIMP-appimage/releases/tag/gimp-plugins-patches-for-the-hybrid-release).
 
 "Hybrid" Is still a work in progress for GIMP fanatics!
-
-If you are a GIMP fanatic too, you can rely on this build, alternatively [rely on the official Flatpak](https://flathub.org/apps/org.gimp.GIMP) which already has everything you are looking for. 
 
 This build is extremely experimental. **USE AT YOUR OWN RISK!**
 
 #### If you really want use "Hybrid", download it using the tag [continuous-hybrid](https://github.com/ivan-hc/GIMP-appimage/releases/tag/continuous-hybrid)
 - https://github.com/ivan-hc/GIMP-appimage/releases/tag/continuous-hybrid
 
-The build is updated every Sunday (one hour later "Stable").
-
--------------------------- 
-## 5. PPA-based AppImages
-The GIMP Stable and Developer versions based on the Ubuntu PPAs have a code base maintained by third parties, and are therefore obsolete and no longer maintained by me.
-
-If you're constantly looking for updated builds, go with the first three options I've listed above.
-
-**If for some reason you prefer the Ubuntu base and PPAs**, **I recommend you fork this repository** and redirect the Github Actions workflows to the [dedicated scripts](https://github.com/ivan-hc/GIMP-appimage/tree/main/ppa), as well scripts to build AppImages using a Debian base are avauilable [here](https://github.com/ivan-hc/GIMP-appimage/tree/main/debian).
-
-#### If you want to perform tests on my old builds, download them using the numbered tags (example [2.10.34-2.99.16](https://github.com/ivan-hc/GIMP-appimage/releases/tag/2.10.34-2.99.16), [2.10.32-2.99.14](https://github.com/ivan-hc/GIMP-appimage/releases/tag/2.10.32-2.99.14), [2.99.8-dev](https://github.com/ivan-hc/GIMP-appimage/releases/tag/2.99.8-dev) and [2.10.30](https://github.com/ivan-hc/GIMP-appimage/releases/tag/2.10.30))
-- all of them are using this [AppRun](https://github.com/ivan-hc/GIMP-appimage/blob/main/AppRun), this would help in case you want to build your own GIMP.
-
-Personally, I will not build or distribute any more PPA-based versions of GIMP (click [here](#about-junest-based-appimages) for more details about my choice).
+Being a release based on a specific fixed version, the (monthly) updates will be symbolic (to keep the release on top, with the others) and aimed at implementing improvements only.
 
 --------------------------
 # Usage
@@ -98,7 +69,7 @@ chmod a+x ./*.AppImage
 Now you can double-click it or run it from the terminal (which lets you use hidden options).
 
 ### Add plugins
-For the **Stable** and **Dev Edition** builds based on JuNest, the inbuilt command "`gimptool`" is enabled as an option. To use it:
+For the **Stable** and **GIT** builds based on JuNest, the inbuilt command "`gimptool`" is enabled as an option. To use it:
 ```
 ./*.AppImage gimptool [options]
 ```
