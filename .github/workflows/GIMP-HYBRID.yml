@@ -44,7 +44,7 @@ jobs:
         - name: release
           uses: marvinpinto/action-automatic-releases@latest
           with:
-            title: Continuous Hybrid (Experimental, 2.10.38 with Python2 support)
+            title: Continuous Hybrid (Experimental)
             automatic_release_tag: continuous-hybrid
             prerelease: true
             draft: false
