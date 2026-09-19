@@ -9,7 +9,7 @@ DEPENDENCES="aalib appstream ffmpeg dbus gdb ghostscript gjs highway libelf libg
 # Set keywords to searchan include in names of directories and files in /usr/bin (BINSAVED), /usr/share (SHARESAVED) and /usr/lib (LIBSAVED)
 BINSAVED="SAVEBINSPLEASE"
 SHARESAVED="SAVESHAREPLEASE"
-LIBSAVED="gdk-pixbuf libjson libavcodec libcfitsio libgpm libSDL libslang xtest"
+LIBSAVED="im-cedilla gdk-pixbuf libjson libavcodec libcfitsio libgpm libSDL libslang xtest"
 
 # Set the items you want to manually REMOVE. Complete the path in /etc/, /usr/bin/, /usr/lib/, /usr/lib/python*/ and /usr/share/ respectively.
 # The "rm" command will take into account the listed object/path and add an asterisk at the end, completing the path to be removed.
